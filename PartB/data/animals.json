@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "לונה",
+    "type": "dog",
+    "gender": "female",
+    "age": "puppy",
+    "size": "small",
+    "kidsFriendly": true,
+    "image": "images/dog1.jpg",
+    "description": "כלבה קטנה, אוהבת לשחק ומסתדרת מצוין עם ילדים."
+  },
+  {
+    "id": 2,
+    "name": "מקס",
+    "type": "dog",
+    "gender": "male",
+    "age": "adult",
+    "size": "medium",
+    "kidsFriendly": true,
+    "image": "images/dog2.jpg",
+    "description": "כלב אנרגטי שאוהב ריצות וטיולים ארוכים."
+  },
+  {
+    "id": 3,
+    "name": "מיצה",
+    "type": "cat",
+    "gender": "female",
+    "age": "adult",
+    "size": "small",
+    "kidsFriendly": false,
+    "image": "images/cat1.jpg",
+    "description": "חתולה שקטה ועצמאית, אוהבת פינות שקטות בבית."
+  },
+  {
+    "id": 4,
+    "name": "טומי",
+    "type": "cat",
+    "gender": "male",
+    "age": "young",
+    "size": "small",
+    "kidsFriendly": true,
+    "image": "images/cat2.jpg",
+    "description": "חתול חברותי, מסתדר עם ילדים ואוהב לקבל ליטופים."
+  }
+]

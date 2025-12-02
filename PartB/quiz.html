@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PET MATCH - שאלון התאמה</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="main-header">
+    <img src="images/logo.png" alt="לוגו PET MATCH" class="logo">
+</header>
+
+<section class="hero hero-small">
+    <h1>בואו נמצא לכם את המאצ' המושלם 🐾</h1>
+    <p>ענו על כמה שאלות קצרות עליכם ועל תנאי המחיה, ונמצא עבורכם את חיית המחמד המתאימה ביותר.</p>
+</section>
+
+<section class="quiz-section">
+    <h2>שאלון התאמה</h2>
+
+    <form id="quizForm" class="quiz-form">
+
+        <!-- פרטים אישיים -->
+        <div class="quiz-group">
+            <h3>פרטים אישיים</h3>
+            <div class="field-row">
+                <label>שם מלא *</label>
+                <input type="text" name="fullName" required>
+            </div>
+            <div class="field-row">
+                <label>טלפון ליצירת קשר *</label>
+                <input type="tel" name="phone" required>
+            </div>
+            <div class="field-row">
+                <label>כתובת אימייל</label>
+                <input type="email" name="email">
+            </div>
+        </div>
+
+        <!-- תנאי מחיה -->
+        <div class="quiz-group">
+            <h3>תנאי מחיה</h3>
+
+            <div class="field-row">
+                <label>סוג מגורים *</label>
+                <select name="livingType" required>
+                    <option value="">בחרי</option>
+                    <option value="apartment">דירה בבניין</option>
+                    <option value="house">בית עם חצר</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <label>האם יש ילדים בבית?</label>
+                <select name="hasKids">
+                    <option value="">בחרי</option>
+                    <option value="yes">כן</option>
+                    <option value="no">לא</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <label>האם יש חיות נוספות בבית?</label>
+                <select name="hasOtherPets">
+                    <option value="">בחרי</option>
+                    <option value="yes">כן</option>
+                    <option value="no">לא</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ניסיון עם בעלי חיים -->
+        <div class="quiz-group">
+            <h3>ניסיון עם בעלי חיים</h3>
+
+            <div class="field-row">
+                <label>האם זה אימוץ ראשון?</label>
+                <select name="firstAdoption">
+                    <option value="">בחרי</option>
+                    <option value="yes">כן</option>
+                    <option value="no">לא</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <label>האם יש ניסיון באילוף או טיפול?</label>
+                <select name="hasExperience">
+                    <option value="">בחרי</option>
+                    <option value="yes">כן</option>
+                    <option value="no">לא</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <label>ספרו בקצרה על הניסיון (לא חובה)</label>
+                <textarea name="experienceDetails" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- העדפות לגבי החיה -->
+        <div class="quiz-group">
+            <h3>העדפות לגבי החיה</h3>
+
+            <div class="field-row">
+                <label>סוג מועדף</label>
+                <select name="preferredType">
+                    <option value="">לא משנה</option>
+                    <option value="dog">כלב</option>
+                    <option value="cat">חתול</option>
+                    <option value="rabbit">ארנב</option>
+                    <option value="other">אחר</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <label>מין מועדף</label>
+                <select name="preferredGender">
+                    <option value="">לא משנה</option>
+                    <option value="male">זכר</option>
+                    <option value="female">נקבה</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <label>גיל מועדף</label>
+                <select name="preferredAge">
+                    <option value="">לא משנה</option>
+                    <option value="puppy">גור</option>
+                    <option value="adult">בוגר</option>
+                    <option value="senior">מבוגר</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <label>גודל מועדף</label>
+                <select name="preferredSize">
+                    <option value="">לא משנה</option>
+                    <option value="small">קטן</option>
+                    <option value="medium">בינוני</option>
+                    <option value="large">גדול</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <label>אופי מועדף</label>
+                <select name="preferredPersonality">
+                    <option value="">לא משנה</option>
+                    <option value="calm">רגוע</option>
+                    <option value="friendly">חברותי</option>
+                    <option value="kids">מסתדר עם ילדים</option>
+                    <option value="playful">שובב</option>
+                </select>
+            </div>
+
+            <div class="field-row">
+                <label>ספרו לנו על החיה האידיאלית עבורכם (לא חובה)</label>
+                <textarea name="idealPet" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- סיבת האימוץ -->
+        <div class="quiz-group">
+            <h3>סיבת האימוץ</h3>
+            <div class="field-row">
+                <label>למה אתם רוצים לאמץ?</label>
+                <textarea name="adoptionReason" rows="3" required></textarea>
+            </div>
+        </div>
+
+        <!-- כפתור שליחה -->
+        <div class="quiz-actions">
+            <button type="submit" class="start-btn">
+                מצא לי את המאצ' המושלם
+            </button>
+        </div>
+
+        <p id="quizError" class="error-message" style="display:none;">
+            יש שדות חובה שלא מולאו, אנא בדקו שוב את הטופס.
+        </p>
+
+    </form>
+</section>
+
+<footer>
+    <p>© 2025 PET MATCH – התאמה חכמה, אהבה אמיתית 🐾</p>
+</footer>
+
+<script src="js/quiz.js"></script>
+</body>
+</html>
