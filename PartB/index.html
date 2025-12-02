@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PET MATCH - עמוד הבית</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <img src="images/logo.png" alt="לוגו PET MATCH" class="logo">
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>מצא את ההתאמה המושלמת שלך 🐾</h1>
+        <p>ענו על כמה שאלות קצרות ונמצא עבורכם את חיית המחמד שתתאים בדיוק לאורח החיים שלכם.</p>
+        <button class="start-btn" onclick="location.href='quiz.html'">
+            התחל שאלון התאמה
+        </button>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2>איך זה עובד?</h2>
+        <div class="steps-container">
+
+            <div class="step-box">
+                <span class="icon">🧭</span>
+                <h3>ממלאים שאלון</h3>
+                <p>עונים על שאלות קצרות על אורח החיים והעדפותיכם.</p>
+            </div>
+
+            <div class="step-box">
+                <span class="icon">🐶</span>
+                <h3>מקבלים התאמות</h3>
+                <p>אלגוריתם פשוט מסנן את החיות שהכי מתאימות לכם.</p>
+            </div>
+
+            <div class="step-box">
+                <span class="icon">💌</span>
+                <h3>מבקשים לאמץ</h3>
+                <p>ממלאים טופס קצר להגשת בקשה לאימוץ.</p>
+            </div>
+
+            <div class="step-box">
+                <span class="icon">🏡</span>
+                <h3>נותנים בית חם</h3>
+                <p>מקבלים חיית מחמד שאוהבת אתכם בחזרה.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>נשמח לשמוע ממך!</h2>
+        <form id="contactForm">
+            <input type="text" placeholder="שם מלא" required>
+            <input type="email" placeholder="כתובת אימייל" required>
+            <textarea placeholder="הודעה" required></textarea>
+            <button type="submit">שלחו הודעה 📨</button>
+        </form>
+
+        <p id="contactMessage" class="success-message" style="display:none;">
+            תודה! ההודעה נשלחה בהצלחה.
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 PET MATCH – כי לכל חיה מגיע בית חם 🐾</p>
+    </footer>
+
+    <script src="js/home.js"></script>
+</body>
+</html>
