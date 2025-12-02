@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PET MATCH - תוצאות התאמה</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="main-header">
+    <img src="images/logo.png" alt="לוגו PET MATCH" class="logo">
+</header>
+
+<main>
+    <section class="hero hero-small">
+        <h1>מצאנו עבורך התאמות אפשריות 🐾</h1>
+        <p>בהתאם לתשובות שמילאת בשאלון, אלה החיות שיכולות להתאים לך.</p>
+    </section>
+
+    <section class="results-section">
+        <h2>חיות מתאימות לך</h2>
+
+        <!-- סיכום קצר של ההעדפות של המשתמש -->
+        <div class="user-summary" id="userSummary">
+            <!-- נעדכן את זה דרך JavaScript בהמשך -->
+        </div>
+
+        <!-- כאן נכניס כרטיסיות חיות דרך JS -->
+        <div class="results-grid" id="resultsGrid">
+            <!-- כרטיסיות של חיות יופיעו כאן -->
+        </div>
+
+        <div class="results-actions">
+            <button class="secondary-btn" onclick="location.href='quiz.html'">
+                חזרה לשאלון התאמה
+            </button>
+            <button class="secondary-btn" onclick="location.href='index.html'">
+                חזרה לעמוד הבית
+            </button>
+        </div>
+
+        <p id="noResultsMessage" class="no-results-message" style="display:none;">
+            כרגע לא מצאנו חיה שתואמת בדיוק להעדפות שלך, אפשר לנסות לעדכן את התשובות בשאלון ולנסות שוב.
+        </p>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 PET MATCH - התאמה חכמה, אהבה אמיתית 🐾</p>
+</footer>
+
+<script src="js/results.js"></script>
+</body>
+</html>
