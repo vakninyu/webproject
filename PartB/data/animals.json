@@ -62,7 +62,7 @@
   "kidsFriendly": true,
   "goodWithPets": true,
   "location": "פתח תקווה",
-  "image": "images/dog3.jpg",
+  "image": "images/Boni.jpg",
   "description": "כלבה שובבה וחכמה, אוהבת משחקים ומתאימה לבית פעיל."
 },
 {
@@ -76,7 +76,7 @@
   "kidsFriendly": true,
   "goodWithPets": true,
   "location": "חיפה",
-  "image": "images/dog4.jpg",
+  "image": "images/Rocki.jpg",
   "description": "כלב גדול ועדין, אוהב ליטופים וטיולים רגועים."
 },
 {
@@ -90,7 +90,7 @@
   "kidsFriendly": true,
   "goodWithPets": true,
   "location": "תל אביב",
-  "image": "images/cat3.jpg",
+  "image": "images/Nala.jpg",
   "description": "חתולה סקרנית וחברותית, מסתדרת עם ילדים ועם חתולים נוספים."
 },
 {
@@ -99,12 +99,12 @@
   "type": "cat",
   "gender": "male",
   "ageGroup": "adult",
-  "size": "small",
+  "size": "medium",
   "energy": "low",
   "kidsFriendly": false,
   "goodWithPets": true,
   "location": "ראשון לציון",
-  "image": "images/cat4.jpg",
+  "image": "images/Leo.jpg",
   "description": "חתול רגוע שמחפש בית שקט, אוהב פינוקים ושגרה."
 },
 {
@@ -118,7 +118,7 @@
   "kidsFriendly": true,
   "goodWithPets": false,
   "location": "רמת גן",
-  "image": "images/dog5.jpg",
+  "image": "images/Sunny.jpg",
   "description": "גור מתוק ומלא אנרגיה, צריך הרבה תשומת לב ופריקת אנרגיה."
 },
 {
@@ -132,7 +132,7 @@
   "kidsFriendly": true,
   "goodWithPets": false,
   "location": "חולון",
-  "image": "images/cat5.jpg",
+  "image": "images/Moka.jpeg",
   "description": "חתולה עדינה ומאוד אנושית, מעדיפה להיות “המלכה” בבית."
 },
 {
@@ -146,7 +146,7 @@
   "kidsFriendly": true,
   "goodWithPets": true,
   "location": "אשדוד",
-  "image": "images/dog6.jpg",
+  "image": "images/Bruno.jpg",
   "description": "כלב רגוע ונוח, מתאים למשפחה או לזוג שמחפשים חבר ביתי."
 },
 {
@@ -160,7 +160,7 @@
   "kidsFriendly": true,
   "goodWithPets": true,
   "location": "באר שבע",
-  "image": "images/cat6.jpg",
+  "image": "images/Popi.jpg",
   "description": "חתולה מבוגרת ומתוקה, אוהבת שקט וחיבוקים."
 }
 
