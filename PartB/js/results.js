@@ -43,12 +43,14 @@ function renderResults(pets) {
             <h3>${pet.name}</h3>
             <div class="pet-details">
                 <p>סוג: ${pet.type === "dog" ? "כלב" : pet.type === "cat" ? "חתול" : "אחר"}</p>
-                <p>גיל: ${pet.age === "puppy" ? "גור" : pet.age === "adult" ? "בוגר" : pet.age === "senior" ? "מבוגר" : "לא צוין"}</p>
+                <p>גיל: ${pet.ageGroup === "puppy" ? "גור" : pet.ageGroup === "young" ? "צעיר" : pet.ageGroup === "adult" ? "בוגר" : pet.ageGroup === "senior" ? "מבוגר" : "לא צוין"}</p>
                 <p>גודל: ${pet.size === "small" ? "קטן" : pet.size === "medium" ? "בינוני" : pet.size === "large" ? "גדול" : "לא צוין"}</p>
+                <p>מיקום: ${pet.location || "לא צוין"}</p>
+                <p>מסתדר עם חיות: ${pet.goodWithPets === true ? "כן" : pet.goodWithPets === false ? "לא" : "לא צוין"}</p>
                 <p>${pet.description}</p>
             </div>
             <div class="pet-actions">
-                <button class="primary-btn" onclick="goToAdopt(${pet.id})">
+                <button class="primary-btn" type="button" onclick="goToAdopt(${pet.id})">
                     אני רוצה לאמץ
                 </button>
             </div>
