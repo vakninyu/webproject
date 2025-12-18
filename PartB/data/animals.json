@@ -162,5 +162,18 @@
     "location": "באר שבע",
     "image": "images/Popi.png",
     "description": "חתולה מבוגרת ומתוקה, אוהבת שקט וחיבוקים."
-  }
+  },
+{
+  "id": 13,
+  "name": "שלג",
+  "type": "rabbit",
+  "gender": "male",
+  "ageGroup": "young",
+  "size": "small",
+  "kidsFriendly": true,
+  "goodWithPets": true,
+  "location": "דירה / בית",
+  "image": "images/Sheleg.jpg",
+  "description": "ארנב עדין וחברותי, מסתדר עם ילדים ועם חיות נוספות, מתאים גם למגורים בדירה."
+}
 ]

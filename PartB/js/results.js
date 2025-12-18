@@ -42,7 +42,11 @@ function renderResults(pets) {
             <img src="${pet.image}" alt="${pet.name}">
             <h3>${pet.name}</h3>
             <div class="pet-details">
-                <p>סוג: ${pet.type === "dog" ? "כלב" : pet.type === "cat" ? "חתול" : "אחר"}</p>
+               <p> סוג: ${
+                pet.type === "dog" ? "כלב" :
+                pet.type === "cat" ? "חתול" :
+                pet.type === "rabbit" ? "ארנב" : "אחר"}
+                </p>
                 <p>גיל: ${pet.ageGroup === "puppy" ? "גור" : pet.ageGroup === "young" ? "צעיר" : pet.ageGroup === "adult" ? "בוגר" : pet.ageGroup === "senior" ? "מבוגר" : "לא צוין"}</p>
                 <p>גודל: ${pet.size === "small" ? "קטן" : pet.size === "medium" ? "בינוני" : pet.size === "large" ? "גדול" : "לא צוין"}</p>
                 <p>מיקום: ${pet.location || "לא צוין"}</p>
