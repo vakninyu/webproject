@@ -35,15 +35,23 @@ section {
     margin: 0 auto;
 }
 .main-header {
-    padding: 1.5rem 1.5rem 0.5rem;
-    text-align: center;
+    padding:0.15rem 1rem;
+     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+     position: sticky;
+    top: 0;
+    background-color: #FFF9F0;
+    z-index: 1000;
+     height: 90px; 
 }
 
 .logo {
-    height: 60px;
+    height: 120px;
     width: auto;
-    object-fit: contain;
+    display: block;
 }
+
 
 .hero {
     text-align: center;
@@ -96,10 +104,17 @@ section {
 }
 .about {
     margin-top: 1rem;
+    text-align: center;
 }
 
 .about h2 {
     font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.how h2{
+     font-size: 1.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
 }
