@@ -26,29 +26,26 @@
     <!-- Hero Section -->
     <section class="hero home-hero">
         <img src="images/hero_background.jpg" alt="משפחה עם כלב" class="hero-img">
-
-        <div class="hero-content">
-            <h1>מצא את ההתאמה המושלמת שלך🐾</h1>
-            <p>
-         ענו על כמה שאלות קצרות ונמצא עבורכם את חיית המחמד
-         שתתאים בדיוק לאורח החיים שלכם.
-            </p>
-            <button class="start-btn" onclick="location.href='quiz.html'">
-             אני רוצה למצוא את המאצ' המושלם
-            </button>
-        </div>
+        <h1>מצא את ההתאמה המושלמת עבורך🐾</h1>
+        <p>
+         ענו על כמה שאלות קצרות ונמצא עבורכם את החיה המדויקת!
+        </p>
+        <button class="btn hero-btn" onclick="location.href='quiz.html'">
+             גם אני רוצה למצוא את המאצ' המושלם 🡐
+        </button>
     </section>
 
     <!-- About Section -->
-     <section class="about" id="about">
+    <section class="about" id="about">
         <h2>מי אנחנו?</h2>
         <b> Pet Match מאמינה שלא רק אנשים בוחרים חיות- גם לחיות מגיע
          האדם הנכון.🩷🐶<br>
          האתר שלנו מתאים בקלות בין חיות שמחפשות בית חם לבין המאמצים
          המתאימים ביותר.<br>
-        התאמה נכונה = אימוץ מוצלח✔️
+         התאמה נכונה = אימוץ מוצלח✔️
         </b>
-
+        <h3><br>"מאצ' בטינדר-בסוף תמיד נעלם,<br>
+         מאצ' אצלנו-תזכה בחבר חדש מושלם!"</h3>
     </section>
 
 
@@ -86,19 +83,15 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <h2>נשמח לשמוע ממך!<br>
-        יש לך שאלה, הצעה או בקשה? כתוב לנו ונחזור אליך בהקדם
-        </h2>
+        <h2>נשמח לשמוע ממך!</h2>
+        <h4>יש לך שאלה, הצעה או בקשה? כתוב לנו ונחזור אליך בהקדם 🕓</h4>
+        
         <form id="contactForm">
             <input type="text" placeholder="שם מלא" required>
             <input type="email" placeholder="כתובת אימייל" required>
             <textarea placeholder="הודעה" required></textarea>
             <button type="submit">שלח 📩</button>
         </form>
-
-        <p id="contactMessage" class="success-message" style="display:none;">
-            תודה! ההודעה נשלחה בהצלחה.
-        </p>
     </section>
 
     <!-- Footer -->
@@ -106,6 +99,14 @@
         <p>© 2025 PET MATCH – כי לכל חיה מגיע בית חם 🐾</p>
     </footer>
 
-    <script src="js/home.js"></script>
+    <script src="js/homePage.js"></script>
+
+    <div id="successModal" class="modal">
+  <div class="modal-content">
+    <p>תודה! ההודעה נשלחה בהצלחה!</p>
+    <button id="closeModal" class="btn">סגור</button>
+  </div>
+</div>
+
 </body>
 </html>
