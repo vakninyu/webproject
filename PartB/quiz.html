@@ -42,6 +42,7 @@
             <div class="field-row">
                 <label>טלפון ליצירת קשר *</label>
                 <input type="tel" name="phone" required>
+                <small class="field-error" style="display:none;"></small>
             </div>
             <div class="field-row">
                 <label>כתובת אימייל</label>
@@ -63,8 +64,8 @@
             </div>
 
             <div class="field-row">
-                <label>האם יש ילדים בבית?</label>
-                <select name="hasKids">
+                <label>האם יש ילדים בבית?*</label>
+                <select name="hasKids" required>
                     <option value="">בחרי</option>
                     <option value="yes">כן</option>
                     <option value="no">לא</option>
@@ -72,8 +73,8 @@
             </div>
 
             <div class="field-row">
-                <label>האם יש חיות נוספות בבית?</label>
-                <select name="hasOtherPets">
+                <label>האם יש חיות נוספות בבית?*</label>
+                <select name="hasOtherPets" required>
                     <option value="">בחרי</option>
                     <option value="yes">כן</option>
                     <option value="no">לא</option>
@@ -175,14 +176,14 @@
             <h3>סיבת האימוץ</h3>
             <div class="field-row">
                 <label>למה אתם רוצים לאמץ?</label>
-                <textarea name="adoptionReason" rows="3" required></textarea>
+                <textarea name="adoptionReason" rows="3" ></textarea>
             </div>
         </div>
 
         <!-- כפתור שליחה -->
         <div class="quiz-actions">
             <button type="submit" class="btn">
-                מצא לי את המאצ' המושלם
+                מצא לי את המאצ' המושלם 🡐
             </button>
         </div>
 
