@@ -10,18 +10,17 @@
 <body>
 
     <!-- Header -->
-   <header class="main-header">
-    <a href="index.html">
+    <header class="main-header">
+        <a href="index.html">
         <img src="images/LogoHedader.png" alt="לוגו PET MATCH" class="logo">
-    </a>
+        </a>
     <!--menu-->
-    <nav class="main-nav">
-    <a href="#about">מי אנחנו?</a>
-    <a href="#how">איך זה עובד? </a>
-    <a href="#contact">צור קשר </a>
-  </nav>
-</header>
-</header>
+        <nav class="main-nav">
+            <a href="#about">מי אנחנו?</a>
+         <a href="#how">איך זה עובד? </a>
+            <a href="#contact">צור קשר </a>
+        </nav>
+    </header>
 
 
     <!-- Hero Section -->
@@ -29,12 +28,12 @@
         <h1>מצא את ההתאמה המושלמת שלך 🐾</h1>
         <p>ענו על כמה שאלות קצרות ונמצא עבורכם את חיית המחמד שתתאים בדיוק לאורח החיים שלכם.</p>
         <button class="start-btn" onclick="location.href='quiz.html'">
-            התחל שאלון התאמה
+            גם אני רוצה למצוא את המאצ' המושלם ⬅︎
         </button>
     </section>
 
     <!-- About Section -->
-     <section class="about">
+     <section class="about" id="about">
         <h2>מי אנחנו?</h2>
         <b> Pet Match מאמינה שלא רק אנשים בוחרים חיות- גם לחיות מגיע
          האדם הנכון.🩷🐶<br>
@@ -47,7 +46,7 @@
 
 
      <!-- How Section -->
-    <section class="how">
+    <section class="how" id="how">
         <h2>איך זה עובד?</h2>
         <div class="steps-container">
 
@@ -79,7 +78,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact">
+    <section class="contact" id="contact">
         <h2>נשמח לשמוע ממך!<br>
         יש לך שאלה, הצעה או בקשה? כתוב לנו ונחזור אליך בהקדם
         </h2>
@@ -87,7 +86,7 @@
             <input type="text" placeholder="שם מלא" required>
             <input type="email" placeholder="כתובת אימייל" required>
             <textarea placeholder="הודעה" required></textarea>
-            <button type="submit">שלחו הודעה 📨</button>
+            <button type="submit">שלח 📩</button>
         </form>
 
         <p id="contactMessage" class="success-message" style="display:none;">

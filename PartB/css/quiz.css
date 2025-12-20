@@ -1,0 +1,91 @@
+/* ========= QUIZ.CSS (רק עמוד השאלון) ========= */
+
+/* עיצוב עמוד השאלון */
+.hero-small {
+    margin-bottom: 1.5rem;
+}
+
+.quiz-section {
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.quiz-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.quiz-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.quiz-group {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+}
+
+.quiz-group:last-child {
+    border-bottom: none;
+}
+
+.quiz-group h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: #333333;
+}
+
+.field-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 0.6rem;
+}
+
+.field-row label {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.field-row input,
+.field-row select,
+.field-row textarea {
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.95rem;
+}
+
+/* כפתור בתחתית הטופס */
+.quiz-actions {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.error-message {
+    text-align: center;
+    margin-top: 0.8rem;
+    color: #E06666;
+    font-weight: 500;
+}
+
+/* רספונסיביות */
+@media (max-width: 600px) {
+    .quiz-section {
+        padding: 1.5rem 1.1rem;
+    }
+
+    .quiz-group h3 {
+        font-size: 1.1rem;
+    }
+
+    .field-row label {
+        font-size: 0.9rem;
+    }
+}

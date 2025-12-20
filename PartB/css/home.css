@@ -1,0 +1,189 @@
+/* ========= HOME.CSS (רק עמוד הבית) ========= */
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: linear-gradient(135deg, #AEE2FF, #FFA559);
+    color: #ffffff;
+    border-radius: 18px;
+    max-width: 1100px;
+    margin: 0 auto 2rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    animation: heroFadeIn 0.8s ease-in;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.start-btn {
+    background-color: #FFA559;
+    border: none;
+    padding: 0.9rem 1.8rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.start-btn:hover {
+    background-color: #FFBE85;
+    transform: scale(1.03);
+}
+
+/* אנימציה עדינה לכניסת ה־hero */
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* About Section */
+.about {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* How Section */
+.how h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+}
+
+.step-box {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.step-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.step-box .icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.step-box h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+}
+
+.step-box p {
+    font-size: 0.95rem;
+    color: #555555;
+}
+
+/* Contact Section */
+.contact {
+    background: linear-gradient(135deg, #AEE2FF, #FFA559);
+    border-radius: 18px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.8rem 1rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.contact h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#contactForm input,
+#contactForm textarea {
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    padding: 0.45rem;
+    font-size: 0.95rem;
+}
+
+#contactForm textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+#contactForm button {
+    background-color: #FFA559;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 0.4rem;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+#contactForm button:hover {
+    background-color: #FFBE85;
+    transform: scale(1.02);
+}
+
+.success-message {
+    text-align: center;
+    margin-top: 0.8rem;
+    color: #256029;
+    font-weight: 500;
+}
+
+/* רספונסיביות לעמוד הבית */
+@media (max-width: 768px) {
+    .hero {
+        padding: 2.2rem 1.2rem;
+    }
+
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .steps-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .steps-container {
+        grid-template-columns: 1fr;
+    }
+}
