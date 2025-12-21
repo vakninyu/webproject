@@ -1,25 +1,84 @@
-const quizForm = document.getElementById("quizForm");
-const quizError = document.getElementById("quizError");
+// quiz.js – גרסה סופית וקפדנית לפי חלק ב' והאפיון
 
-if (quizForm) {
-    quizForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const quizForm = document.getElementById("quizForm");
+  const quizError = document.getElementById("quizError");
+  const submitBtn = quizForm?.querySelector('button[type="submit"]');
 
-        // בדיקת שדות חובה בסיסית דרך התכונה required של HTML
-        if (!quizForm.checkValidity()) {
-            quizError.style.display = "block";
-            return;
-        }
+  // בדיקה שאלמנטים קיימים
+  if (!quizForm || !quizError || !submitBtn) {
+    console.warn("Quiz form elements are missing. Check your HTML.");
+    return;
+  }
 
-        quizError.style.display = "none";
+  // לא להציג שגיאה בטעינת העמוד
+  quizError.style.display = "none";
+  quizError.textContent = "";
 
-        const formData = new FormData(quizForm);
-        const answers = Object.fromEntries(formData.entries());
+  quizForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-        // שמירת התשובות ב localStorage
-        localStorage.setItem("quizAnswers", JSON.stringify(answers));
+    quizError.style.display = "none";
+    quizError.textContent = "";
 
-        // מעבר לעמוד התוצאות
-        window.location.href = "results.html";
-    });
+    /* =========================
+   1) ולידציה קפדנית לטלפון
+   עם הודעה צמודה לשדה
+========================== */
+const phoneInput = quizForm.querySelector('input[name="phone"]');
+const phoneError = phoneInput.parentElement.querySelector(".field-error");
+
+// ניקוי שגיאות קודמות
+phoneError.style.display = "none";
+phoneError.textContent = "";
+phoneInput.classList.remove("input-error");
+
+const phoneValue = phoneInput.value.trim();
+const phoneRegex = /^0\d{9}$/;
+
+if (!phoneRegex.test(phoneValue)) {
+  phoneError.textContent =
+    "מספר הטלפון אינו תקין. יש להזין 10 ספרות ולהתחיל ב־0.";
+  phoneError.style.display = "block";
+
+  phoneInput.classList.add("input-error");
+  phoneInput.focus();
+  return;
 }
+
+    /* =========================
+       2) בדיקת שדות חובה (HTML)
+    ========================== */
+    if (!quizForm.checkValidity()) {
+      quizError.textContent =
+        "יש שדות חובה שלא מולאו. אנא בדקו את הטופס ונסו שוב.";
+      quizError.style.display = "block";
+
+      const firstInvalid = quizForm.querySelector(":invalid");
+      if (firstInvalid) firstInvalid.focus();
+
+      return;
+    }
+
+    /* =========================
+       3) שמירת נתונים ב־localStorage
+    ========================== */
+    const formData = new FormData(quizForm);
+    const answers = Object.fromEntries(formData.entries());
+    localStorage.setItem("quizAnswers", JSON.stringify(answers));
+
+    /* =========================
+       4) חוויית משתמש – טעינה קצרה
+    ========================== */
+    submitBtn.disabled = true;
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = "טוען התאמות...";
+
+    /* =========================
+       5) מעבר לעמוד התוצאות
+    ========================== */
+    setTimeout(() => {
+      window.location.href = "results.html";
+    }, 1000);
+  });
+});

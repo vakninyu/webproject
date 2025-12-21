@@ -1,3 +1,4 @@
+
 /* איפוס בסיסי */
 * {
     box-sizing: border-box;
@@ -7,6 +8,7 @@
 
 html {
     font-size: 16px;
+    scroll-padding-top: 120px;
 }
 
 body {
@@ -34,40 +36,83 @@ section {
     max-width: 1100px;
     margin: 0 auto;
 }
+
+section h2 {
+    font-style: italic;
+}
+
 .main-header {
-    padding: 1.5rem 1.5rem 0.5rem;
-    text-align: center;
+    padding:0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    position: sticky;
+    top: 0;
+    background-color: #FFF9F0;
+    z-index: 1000;
+    height: 100px; 
+}
+
+.main-nav {
+  display: flex;
+  gap: 2rem;            
+}
+
+.main-nav a {
+  text-decoration: none;
 }
 
 .logo {
-    height: 60px;
+    height: 100px;
     width: auto;
-    object-fit: contain;
+    display: block;
 }
 
 .hero {
     text-align: center;
-    padding: 3rem 1.5rem;
+    padding: 2rem 1.5rem;
     background: linear-gradient(135deg, #AEE2FF, #FFA559);
     color: #ffffff;
     border-radius: 18px;
     max-width: 1100px;
-    margin: 0 auto 2rem;
+    margin: 1rem auto 1.5rem;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     animation: heroFadeIn 0.8s ease-in;
 }
 
 .hero h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
 }
 
 .hero p {
     font-size: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0rem;
 }
 
-.start-btn {
+
+/*------עמוד הבית-----*/
+/*------ HERO עמוד הבית ------*/
+
+.home-hero {
+  position: relative;
+  padding: 0.4rem;              /* מסגרת פנימית */
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* תמונת HERO */
+.hero-img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.btn {
     background-color: #FFA559;
     border: none;
     padding: 0.9rem 1.8rem;
@@ -78,10 +123,18 @@ section {
     transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
-.start-btn:hover {
+.btn:hover {
     background-color: #FFBE85;
     transform: scale(1.03);
 }
+
+.hero-btn {
+  display: block;
+  margin: 1rem auto 0;
+  max-width: 420px;
+  width: 100%;
+}
+
 
 /* אנימציה עדינה לכניסת ה־hero */
 @keyframes heroFadeIn {
@@ -96,10 +149,17 @@ section {
 }
 .about {
     margin-top: 1rem;
+    text-align: center;
 }
 
 .about h2 {
     font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.how h2{
+     font-size: 1.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
 }
@@ -140,15 +200,15 @@ section {
     color: #555555;
 }
 .contact {
-    background-color: #AEE2FF;
+    background: linear-gradient(135deg, #AEE2FF, #FFA559);
     border-radius: 18px;
-    margin-top: 2.5rem;
-    margin-bottom: 2rem;
-    padding: 2rem 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.8rem 1rem;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
-.contact h2 {
+.contact h2, h4 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
     text-align: center;
@@ -157,7 +217,7 @@ section {
 #contactForm {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.3rem;
     max-width: 500px;
     margin: 0 auto;
 }
@@ -166,19 +226,19 @@ section {
 #contactForm textarea {
     border: 1px solid #cccccc;
     border-radius: 10px;
-    padding: 0.7rem;
+    padding: 0.45rem;
     font-size: 0.95rem;
 }
 
 #contactForm textarea {
-    min-height: 90px;
+    min-height: 55px;
     resize: vertical;
 }
 
 #contactForm button {
-    background-color: #77DD77;
+    background-color: #FFA559;
     border: none;
-    padding: 0.8rem;
+    padding: 0.55rem;
     border-radius: 999px;
     font-size: 1rem;
     font-weight: 600;
@@ -188,16 +248,38 @@ section {
 }
 
 #contactForm button:hover {
-    background-color: #5EC95E;
+    background-color: #FFBE85;
     transform: scale(1.02);
 }
 
-.success-message {
-    text-align: center;
-    margin-top: 0.8rem;
-    color: #256029;
-    font-weight: 500;
+/* חלונית הודעה */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
 }
+
+.modal-content {
+    background: #ffffff;
+    padding: 1.8rem 2rem;
+    border-radius: 18px;
+    text-align: center;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content p {
+    color: #fa1606;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+}
+
 footer {
     text-align: center;
     padding: 1rem 1.5rem 1.5rem;
@@ -205,13 +287,16 @@ footer {
     color: #555555;
 }
 @media (max-width: 768px) {
-
     .hero {
-        padding: 2.2rem 1.2rem;
+        padding: 1.6rem 1.2rem;   /* אחיד במובייל */
     }
 
     .hero h1 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;        /* אחיד במובייל */
+    }
+
+    .hero p {
+        font-size: 0.95rem;       /* אחיד במובייל */
     }
 
     .steps-container {
@@ -231,11 +316,6 @@ footer {
 }
 
 /* עיצוב עמוד השאלון */
-
-.hero-small {
-    margin-bottom: 1.5rem;
-}
-
 .quiz-section {
     max-width: 900px;
     margin: 0 auto 2.5rem;

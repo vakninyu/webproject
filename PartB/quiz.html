@@ -11,12 +11,18 @@
     <!-- Header -->
 <header class="main-header">
     <a href="index.html">
-        <img src="images/logo.jpg" alt="לוגו PET MATCH" class="logo">
+        <img src="images/LogoHedader.png" alt="לוגו PET MATCH" class="logo">
     </a>
+    <!--menu -->
+    <nav class="main-nav">
+    <a href="index.html#about">מי אנחנו?</a>
+    <a href="index.html#how">איך זה עובד?</a>
+    <a href="index.html#contact">צור קשר</a>
+  </nav>
 </header>
 
 <!-- Hero Section -->
-<section class="hero hero-small">
+<section class="hero">
     <h1>בואו נמצא לכם את המאצ' המושלם 🐾</h1>
     <p>ענו על כמה שאלות קצרות עליכם ועל תנאי המחיה, ונמצא עבורכם את חיית המחמד המתאימה ביותר.</p>
 </section>
@@ -36,6 +42,7 @@
             <div class="field-row">
                 <label>טלפון ליצירת קשר *</label>
                 <input type="tel" name="phone" required>
+                <small class="field-error" style="display:none;"></small>
             </div>
             <div class="field-row">
                 <label>כתובת אימייל</label>
@@ -57,8 +64,8 @@
             </div>
 
             <div class="field-row">
-                <label>האם יש ילדים בבית?</label>
-                <select name="hasKids">
+                <label>האם יש ילדים בבית?*</label>
+                <select name="hasKids" required>
                     <option value="">בחרי</option>
                     <option value="yes">כן</option>
                     <option value="no">לא</option>
@@ -66,8 +73,8 @@
             </div>
 
             <div class="field-row">
-                <label>האם יש חיות נוספות בבית?</label>
-                <select name="hasOtherPets">
+                <label>האם יש חיות נוספות בבית?*</label>
+                <select name="hasOtherPets" required>
                     <option value="">בחרי</option>
                     <option value="yes">כן</option>
                     <option value="no">לא</option>
@@ -169,14 +176,14 @@
             <h3>סיבת האימוץ</h3>
             <div class="field-row">
                 <label>למה אתם רוצים לאמץ?</label>
-                <textarea name="adoptionReason" rows="3" required></textarea>
+                <textarea name="adoptionReason" rows="3" ></textarea>
             </div>
         </div>
 
         <!-- כפתור שליחה -->
         <div class="quiz-actions">
-            <button type="submit" class="start-btn">
-                מצא לי את המאצ' המושלם
+            <button type="submit" class="btn">
+                מצא לי את המאצ' המושלם 🡐
             </button>
         </div>
 
