@@ -1,4 +1,3 @@
-
 /* איפוס בסיסי */
 * {
     box-sizing: border-box;
@@ -13,7 +12,7 @@ html {
 
 body {
     font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-    background-color: #FFF9F0; /* שמנת עדין */
+    background-color: #FFF9F0;
     color: #333333;
     direction: rtl;
     text-align: right;
@@ -41,8 +40,10 @@ section h2 {
     font-style: italic;
 }
 
+/* ================= HEADER ================= */
+
 .main-header {
-    padding:0.5rem 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,16 +52,25 @@ section h2 {
     top: 0;
     background-color: #FFF9F0;
     z-index: 1000;
-    height: 100px; 
+    height: 100px;
 }
 
 .main-nav {
-  display: flex;
-  gap: 2rem;            
+    display: flex;
+    gap: 2rem;
 }
 
 .main-nav a {
-  text-decoration: none;
+    text-decoration: none;
+    color: #333333;
+    font-weight: 600;
+    padding: 0.4rem 0.6rem;
+    border-radius: 10px;
+    transition: background-color 0.15s ease;
+}
+
+.main-nav a:hover {
+    background-color: rgba(255,165,89,0.25);
 }
 
 .logo {
@@ -68,6 +78,8 @@ section h2 {
     width: auto;
     display: block;
 }
+
+/* ================= HERO כללי ================= */
 
 .hero {
     text-align: center;
@@ -88,29 +100,59 @@ section h2 {
 
 .hero p {
     font-size: 1rem;
-    margin-bottom: 0rem;
+    margin-bottom: 0;
 }
 
-
-/*------עמוד הבית-----*/
-/*------ HERO עמוד הבית ------*/
+/* ================= HERO עמוד הבית ================= */
 
 .home-hero {
-  position: relative;
-  padding: 0.4rem;              /* מסגרת פנימית */
-  border-radius: 18px;
-  overflow: hidden;
+    position: relative;
+    background-image: url("../images/hero_background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 360px;
+    padding: 3rem 1.5rem;
+    border-radius: 18px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: #ffffff;
 }
 
-/* תמונת HERO */
-.hero-img {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 12px;
-  display: block;
+/* שכבת כהות */
+.home-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 1;
 }
+
+/* תוכן מעל השכבה */
+.home-hero > * {
+    position: relative;
+    z-index: 2;
+}
+
+.home-hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.home-hero p {
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+    max-width: 650px;
+}
+
+/* ================= כפתורים ================= */
 
 .btn {
     background-color: #FFA559;
@@ -129,14 +171,13 @@ section h2 {
 }
 
 .hero-btn {
-  display: block;
-  margin: 1rem auto 0;
-  max-width: 420px;
-  width: 100%;
+    display: block;
+    margin: 1rem auto 0;
+    max-width: 420px;
+    width: 100%;
 }
 
-
-/* אנימציה עדינה לכניסת ה־hero */
+/* אנימציה */
 @keyframes heroFadeIn {
     from {
         opacity: 0;
@@ -147,6 +188,9 @@ section h2 {
         transform: translateY(0);
     }
 }
+
+/* ================= ABOUT ================= */
+
 .about {
     margin-top: 1rem;
     text-align: center;
@@ -155,11 +199,12 @@ section h2 {
 .about h2 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    text-align: center;
 }
 
-.how h2{
-     font-size: 1.5rem;
+/* ================= HOW ================= */
+
+.how h2 {
+    font-size: 1.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
 }
@@ -178,6 +223,47 @@ section h2 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+/* ===== איורים לאזור "איך זה עובד" ===== */
+
+.step-illu {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 0.6rem;
+    transform: translateY(0);
+    transition: transform 0.25s ease;
+}
+
+/* אנימציית hover עדינה */
+.step-box:hover .step-illu {
+    transform: translateY(-6px);
+}
+
+/* אנימציה רציפה, עדינה ומקצועית */
+@keyframes floaty {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-4px); }
+    100% { transform: translateY(0); }
+}
+
+.step-illu {
+    animation: floaty 3.2s ease-in-out infinite;
+}
+
+/* הסטה קטנה בין האיורים כדי שלא יזוזו יחד */
+.steps-container .step-box:nth-child(2) .step-illu {
+    animation-delay: 0.3s;
+}
+
+.steps-container .step-box:nth-child(3) .step-illu {
+    animation-delay: 0.6s;
+}
+
+.steps-container .step-box:nth-child(4) .step-illu {
+    animation-delay: 0.9s;
+}
+
 
 .step-box:hover {
     transform: translateY(-4px);
@@ -199,16 +285,19 @@ section h2 {
     font-size: 0.95rem;
     color: #555555;
 }
+
+/* ================= CONTACT ================= */
+
 .contact {
     background: linear-gradient(135deg, #AEE2FF, #FFA559);
     border-radius: 18px;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: 1.5rem auto;
     padding: 0.8rem 1rem;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
-.contact h2, h4 {
+.contact h2,
+.contact h4 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
     text-align: center;
@@ -252,7 +341,8 @@ section h2 {
     transform: scale(1.02);
 }
 
-/* חלונית הודעה */
+/* ================= MODAL ================= */
+
 .modal {
     display: none;
     position: fixed;
@@ -280,23 +370,24 @@ section h2 {
     margin-bottom: 1.2rem;
 }
 
+/* ================= FOOTER ================= */
+
 footer {
     text-align: center;
     padding: 1rem 1.5rem 1.5rem;
     font-size: 0.9rem;
     color: #555555;
 }
-@media (max-width: 768px) {
-    .hero {
-        padding: 1.6rem 1.2rem;   /* אחיד במובייל */
-    }
 
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
     .hero h1 {
-        font-size: 1.5rem;        /* אחיד במובייל */
+        font-size: 1.5rem;
     }
 
     .hero p {
-        font-size: 0.95rem;       /* אחיד במובייל */
+        font-size: 0.95rem;
     }
 
     .steps-container {
@@ -305,231 +396,11 @@ footer {
 }
 
 @media (max-width: 480px) {
-
     .steps-container {
         grid-template-columns: 1fr;
     }
 
     section {
         padding: 2rem 1rem;
-    }
-}
-
-/* עיצוב עמוד השאלון */
-.quiz-section {
-    max-width: 900px;
-    margin: 0 auto 2.5rem;
-    background-color: #ffffff;
-    border-radius: 18px;
-    padding: 2rem 1.5rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-.quiz-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.quiz-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.quiz-group {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 1rem;
-}
-
-.quiz-group:last-child {
-    border-bottom: none;
-}
-
-.quiz-group h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.8rem;
-    color: #333333;
-}
-
-.field-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin-bottom: 0.6rem;
-}
-
-.field-row label {
-    font-size: 0.95rem;
-    font-weight: 500;
-}
-
-.field-row input,
-.field-row select,
-.field-row textarea {
-    border: 1px solid #cccccc;
-    border-radius: 10px;
-    padding: 0.6rem 0.7rem;
-    font-size: 0.95rem;
-}
-
-/* כפתור בתחתית הטופס */
-
-.quiz-actions {
-    text-align: center;
-    margin-top: 0.5rem;
-}
-
-.error-message {
-    text-align: center;
-    margin-top: 0.8rem;
-    color: #E06666;
-    font-weight: 500;
-}
-
-/* רספונסיביות */
-
-@media (max-width: 600px) {
-    .quiz-section {
-        padding: 1.5rem 1.1rem;
-    }
-
-    .quiz-group h3 {
-        font-size: 1.1rem;
-    }
-
-    .field-row label {
-        font-size: 0.9rem;
-    }
-}
-/* עמוד תוצאות התאמה */
-
-.results-section {
-    max-width: 1100px;
-    margin: 0 auto 2.5rem;
-    background-color: #ffffff;
-    border-radius: 18px;
-    padding: 2rem 1.5rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-.results-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.2rem;
-    text-align: center;
-}
-
-.user-summary {
-    background-color: #E8F6FF;
-    border-radius: 14px;
-    padding: 1rem 1.2rem;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
-}
-
-.user-summary strong {
-    font-weight: 600;
-}
-
-.results-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-    margin-bottom: 1.5rem;
-}
-
-.pet-card {
-    background-color: #FFF9F0;
-    border-radius: 16px;
-    padding: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.pet-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-.pet-card img {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 0.5rem;
-    object-fit: cover;
-    max-height: 180px;
-}
-
-.pet-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.2rem;
-}
-
-.pet-details {
-    font-size: 0.9rem;
-    color: #555555;
-}
-
-.pet-actions {
-    margin-top: 0.6rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-.primary-btn {
-    background-color: #FFA559;
-    border: none;
-    padding: 0.6rem 0.8rem;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-.primary-btn:hover {
-    background-color: #FFBE85;
-}
-
-.secondary-btn {
-    background-color: #AEE2FF;
-    border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 999px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #333333;
-    cursor: pointer;
-}
-
-.secondary-btn:hover {
-    background-color: #8FD4F5;
-}
-
-.results-actions {
-    text-align: center;
-    margin-top: 0.5rem;
-}
-
-.no-results-message {
-    text-align: center;
-    margin-top: 1rem;
-    color: #E06666;
-}
-
-/* רספונסיביות לתוצאות */
-
-@media (max-width: 900px) {
-    .results-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .results-grid {
-        grid-template-columns: 1fr;
     }
 }
