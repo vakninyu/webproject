@@ -144,6 +144,11 @@ document.addEventListener("DOMContentLoaded", () => {
         pool = pool.filter(p => p.type === answers.preferredType);
       }
 
+      // סינון קשיח לפי מין, אם נבחר
+if (answers.preferredGender && answers.preferredGender.trim() !== "") {
+  pool = pool.filter(p => p.gender === answers.preferredGender);
+}
+
       // כלל דירה, מסננים חיות גדולות
       if (answers.livingType === "apartment") {
         pool = pool.filter(p => p.size !== "large");
