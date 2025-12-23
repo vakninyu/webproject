@@ -505,6 +505,122 @@ section h2 {
     margin-bottom: 1.2rem;
 }
 
+/* ================= RESULTS PAGE ================= */
+
+.results-section {
+  padding: 2rem 1.5rem 3rem;
+}
+
+.user-summary {
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+  margin: 1rem 0 1.2rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.pet-card {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.pet-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.pet-card h3 {
+  padding: 0.9rem 1rem 0.3rem;
+  font-size: 1.1rem;
+}
+
+.pet-details {
+  padding: 0 1rem 1rem;
+  display: grid;
+  gap: 0.35rem;
+  color: #334155;
+  line-height: 1.5;
+}
+
+.pet-actions {
+  margin-top: auto;
+  padding: 0 1rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.primary-btn {
+  background-color: #FFA559;
+  border: none;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.primary-btn:hover {
+  background-color: #FFBE85;
+  transform: scale(1.02);
+}
+
+.secondary-btn {
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(0,0,0,0.10);
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.secondary-btn:hover {
+  background: rgba(255,165,89,0.18);
+  transform: translateY(-1px);
+}
+
+.results-actions {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  margin-top: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.no-results-message {
+  margin-top: 1.2rem;
+  text-align: center;
+  color: #b42318;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .results-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560p
+
+
 /* ================= FOOTER ================= */
 
 footer {
