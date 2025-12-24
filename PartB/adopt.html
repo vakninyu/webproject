@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl"> <!-- Hebrew language and right-to-left direction -->
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PET MATCH - בקשת אימוץ</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Responsive design -->
+  <title>PET MATCH - בקשת אימוץ</title> <!-- Page title -->
+  <link rel="stylesheet" href="css/style.css" /> <!-- Link to external CSS -->
 </head>
 <body>
 
-<header class="main-header">
+  <!-- Header -->
+<header class="main-header"> 
   <a href="index.html">
     <img src="images/LogoHedader.png" alt="לוגו PET MATCH" class="logo">
   </a>
-
+ <!-- Navigation links -->
   <nav class="main-nav">
     <a href="index.html#about">מי אנחנו?</a>
     <a href="index.html#how">איך זה עובד?</a>
@@ -21,48 +22,62 @@
   </nav>
 </header>
 
-<main class="adopt-page">
-  <div class="adopt-layout">
+<!-- Main adoption page content -->
+<main class="adopt-page"> 
+  <div class="adopt-layout"> 
 
+  <!-- errors and selected pet preview -->
     <aside class="adopt-side">
-      <div id="adoptError" class="error-message" style="display:none;">
+
+    <!-- Shown if no pet was selected properly --> 
+      <div id="adoptError" class="error-message" style="display:none;"> 
         לא נמצאה חיה, חזרי לתוצאות ובחרי מחדש.
       </div>
 
+    <!-- Selected pet preview container -->
       <div id="petPreview" class="pet-preview" style="display:none;"></div>
     </aside>
 
+    <!-- Adoption form section -->
     <section class="adopt-main">
       <h2>פרטי המאמצ/ת</h2>
 
+    <!-- Adoption request form -->
       <form id="adoptForm" class="adopt-form">
         <div class="form-grid">
+
+    <!-- Adopter's personal details -->
           <div class="field-row">
             <label>שם מלא *</label>
             <input type="text" name="adopterName" required>
           </div>
 
+    <!-- Phone number with validation -->   
           <div class="field-row">
             <label>טלפון *</label>
             <input type="tel" name="adopterPhone" required>
             <small id="phoneErr" class="field-error" style="display:none;"></small>
           </div>
 
+    <!-- Optional email -->
           <div class="field-row">
             <label>אימייל</label>
             <input type="email" name="adopterEmail">
           </div>
 
+    <!-- City is optional but helpful for the shelter -->
           <div class="field-row">
             <label>עיר</label>
             <input type="text" name="adopterCity">
           </div>
         </div>
 
+    <!-- Echo of quiz preferences, editable before submission -->
       <div class="quiz-echo" id="quizEcho">
-  <h3>העדפות מהשאלון:</h3>
-
+    <h3>העדפות מהשאלון:</h3>
   <div class="prefs-grid">
+
+    <!-- Living type preference -->
     <div class="field-row">
       <label for="prefLivingType">סוג מגורים</label>
       <select id="prefLivingType" name="prefLivingType">
@@ -71,7 +86,7 @@
         <option value="house">בית עם חצר</option>
       </select>
     </div>
-
+<!-- Kids at home -->
     <div class="field-row">
       <label for="prefHasKids">ילדים בבית</label>
       <select id="prefHasKids" name="prefHasKids">
@@ -81,6 +96,7 @@
       </select>
     </div>
 
+    <!-- Other pets -->
     <div class="field-row">
       <label for="prefHasOtherPets">חיות נוספות בבית</label>
       <select id="prefHasOtherPets" name="prefHasOtherPets">
@@ -90,6 +106,7 @@
       </select>
     </div>
 
+    <!-- Preferred animal type -->
     <div class="field-row">
       <label for="prefPreferredType">סוג מועדף</label>
       <select id="prefPreferredType" name="prefPreferredType">
@@ -101,6 +118,7 @@
       </select>
     </div>
 
+    <!-- Preferred gender -->
     <div class="field-row">
       <label for="prefPreferredGender">מין מועדף</label>
       <select id="prefPreferredGender" name="prefPreferredGender">
@@ -110,6 +128,7 @@
       </select>
     </div>
 
+    <!-- Preferred age -->
     <div class="field-row">
       <label for="prefPreferredAge">גיל מועדף</label>
       <select id="prefPreferredAge" name="prefPreferredAge">
@@ -120,6 +139,7 @@
       </select>
     </div>
 
+    <!-- Preferred size -->
     <div class="field-row">
       <label for="prefPreferredSize">גודל מועדף</label>
       <select id="prefPreferredSize" name="prefPreferredSize">
@@ -128,21 +148,31 @@
         <option value="medium">בינוני</option>
         <option value="large">גדול</option>
       </select>
+
     </div>
   </div>
 </div>
 
-        <div class="field-row">
-          <label>הודעה לעמותה</label>
-          <textarea name="message" rows="4" placeholder="ספרו בקצרה למה אתם מתאימים לחיה הזו"></textarea>
-        </div>
+    <!-- Message to the shelter -->
+    <div class="field-row">
+      <label>הודעה לעמותה</label>
+      <textarea name="message" rows="4" placeholder="ספרו בקצרה למה אתם מתאימים לחיה הזו"></textarea>
+      </div>
 
-        <div class="adopt-submit">
-          <button type="button" class="secondary-btn" id="saveDraftBtn">שמירת טיוטה</button>
-          <button type="submit" class="btn">שליחת בקשת אימוץ</button>
-        </div>
+    <!-- Action buttons -->
+    <div class="adopt-submit">
 
+    <!-- Saves form data locally without submitting -->
+    <button type="button" class="secondary-btn" id="saveDraftBtn">שמירת טיוטה</button>
+
+    <!-- Final form submission -->
+    <button type="submit" class="btn">שליחת בקשת אימוץ</button>
+    </div>
+  
+    <!-- General form error -->
         <p id="adoptFormError" class="error-message" style="display:none;"></p>
+
+    <!-- Success message shown after submit -->
         <p id="adoptSuccess" class="success-message" style="display:none;">הבקשה נשלחה בהצלחה</p>
       </form>
     </section>
@@ -154,6 +184,6 @@
   <p>© 2025 PET MATCH - התאמה חכמה, אהבה אמיתית 🐾</p>
 </footer>
 
-<script src="js/adopt.js"></script>
+<script src="js/adopt.js"></script> <!-- Link to external JavaScript -->
 </body>
 </html>
