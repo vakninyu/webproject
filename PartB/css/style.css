@@ -1,15 +1,17 @@
-/* איפוס בסיסי */
+/* ================= GLOBAL RESET ================= */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* ================= BASE STYLES ================= */
 html {
     font-size: 16px;
     scroll-padding-top: 120px;
 }
 
+/*main body styles*/
 body {
     font-family: "Segoe UI", Tahoma, Arial, sans-serif;
     background-color: #FFF9F0;
@@ -19,32 +21,32 @@ body {
 }
 
 
-/* קישורים וכפתורים */
+/* ===== Forms & buttons: keep the same font everywhere ===== */
 button,
 input,
 textarea {
-    font-family: inherit;
+    font-family: inherit; /* Prevent default browser font */
 }
 
 button {
-    cursor: pointer;
+    cursor: pointer; /* Shows it's clickable */
 }
 
-/* מיקום כללי של התוכן */
+/* ===== General content sections layout ===== */
 section {
     padding: 2.5rem 1.5rem;
     max-width: 1100px;
     margin: 0 auto;
 }
 
-section h2 {
-    font-style: italic;
+section h2 { 
+    font-style: italic; /* Small visual style touch */
 }
 
 /* ================= HEADER ================= */
 
+/* Sticky header with logo + navigation */
 .main-header {
-    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,38 +54,42 @@ section h2 {
     position: sticky;
     top: 0;
     gap: 1rem;
-    background-color: #FFF9F0;
-    z-index: 1000;
+    background-color: #FFF9F0; /* Same background as the page */
+    z-index: 1000; /* Always above the content */
     padding: 0.8rem 2rem;
     border-bottom: 1px solid rgba(0,0,0,0.06);
     box-shadow: 0 2px 10px rgba(0,0,0,0.04);
 }
 
-
+/* Nav container with a rounded "pill" look */
 .main-nav{
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(255,255,255,0.55);
+  gap: 0.4rem; /* Small spacing between links */
+  background: rgba(255,255,255,0.55); /* Slight glass effect */
   border: 1px solid rgba(0,0,0,0.06);
   padding: 0.35rem 0.45rem;
   border-radius: 999px;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px); /* Soft blur behind the nav */
 }
 
+/* Navigation links */
 .main-nav a{
-  text-decoration: none;
+  text-decoration: none; 
   color: #333333;
   font-weight: 700;
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
-  transition: background-color 0.15s ease, transform 0.15s ease;
+  padding: 0.45rem 0.9rem; 
+  border-radius: 999px; 
+  transition: background-color 0.15s ease, transform 0.15s ease; /* Smooth hover effects */
 }
 
+/* Hover feedback for nav */
 .main-nav a:hover{
-  background-color: rgba(255,165,89,0.22);
-  transform: translateY(-1px);
+  background-color: rgba(255,165,89,0.22); /* Light orange highlight */
+  transform: translateY(-1px); /* Slight lift effect */
 }
+
+/* CTA link in the nav (highlighted button look) */
 .nav-cta{
   background-color: #FFA559;
   color: #ffffff;
@@ -100,16 +106,14 @@ section h2 {
   transform: translateY(-1px);
 }
 
-
-
+/* Logo sizing */
 .logo {
     height: 110px;
     width: auto;
     display: block;
 }
 
-/* ================= HERO כללי ================= */
-
+/* ================= HERO (GENERAL) ================= */
 .hero {
     text-align: center;
     padding: 2rem 1.5rem;
@@ -119,7 +123,7 @@ section h2 {
     max-width: 1100px;
     margin: 1rem auto 1.5rem;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-    animation: heroFadeIn 0.8s ease-in;
+    animation: heroFadeIn 0.8s ease-in; /* Small entrance animation */
 }
 
 .hero h1 {
@@ -132,8 +136,9 @@ section h2 {
     margin-bottom: 0;
 }
 
-/* ================= HERO עמוד הבית ================= */
+/* ================= HOME HERO ================= */
 
+/* Home hero uses a background image */
 .home-hero {
     position: relative;
     background-image: url("../images/hero_background.jpg");
@@ -141,7 +146,7 @@ section h2 {
     background-position: center;
     background-repeat: no-repeat;
 
-    min-height: 360px;
+    min-height: 360px; /* Gives it height even if content is short */
     padding: 3rem 1.5rem;
     border-radius: 18px;
     overflow: hidden;
@@ -155,7 +160,7 @@ section h2 {
     color: #ffffff;
 }
 
-/* שכבת כהות */
+/* Dark overlay so white text stays readable */
 .home-hero::before {
     content: "";
     position: absolute;
@@ -164,7 +169,7 @@ section h2 {
     z-index: 1;
 }
 
-/* תוכן מעל השכבה */
+/* Keep content above the overlay */
 .home-hero > * {
     position: relative;
     z-index: 2;
@@ -178,16 +183,17 @@ section h2 {
 .home-hero p {
     font-size: 1.05rem;
     margin-bottom: 1.25rem;
-    max-width: 650px;
+    max-width: 650px; /* Keeps the paragraph from being too wide */
 }
 
-/* ================= כפתורים ================= */
+/* ================= BUTTONS ================= */
 
+/* Primary button */
 .btn {
     background-color: #FFA559;
     border: none;
     padding: 0.9rem 1.8rem;
-    border-radius: 999px;
+    border-radius: 999px; /* Pill button */
     font-size: 1rem;
     font-weight: 600;
     color: #ffffff;
@@ -199,6 +205,7 @@ section h2 {
     transform: scale(1.03);
 }
 
+/* Hero button width control */
 .hero-btn {
     display: block;
     margin: 1rem auto 0;
@@ -206,7 +213,7 @@ section h2 {
     width: 100%;
 }
 
-/* אנימציה */
+/* Hero fade-in animation */
 @keyframes heroFadeIn {
     from {
         opacity: 0;
@@ -221,7 +228,7 @@ section h2 {
 /* ================= ABOUT ================= */
 
 .about {
-  text-align: initial;
+  text-align: initial; /* Avoid forcing center alignment */
 }
 
 .about h1{
@@ -235,9 +242,10 @@ section h2 {
   gap: 2.2rem;
 }
 
+/* About card layout */
 .about-item {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1.2fr 0.8fr; /* Text wider than media */
   gap: 1.8rem;
   align-items: center;
   background: #EEF6FF;
@@ -246,31 +254,33 @@ section h2 {
   box-shadow: 0 4px 14px rgba(0,0,0,0.06);
 }
 
+/* Alternate layout for variation */
 .about-item.reverse {
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: 0.8fr 1.2fr; /* Media wider than text */
 }
 
 .about-item.reverse .about-text {
-  order: 2;
+  order: 2; /* Text comes second */
 }
 
 .about-item.reverse .about-media {
-  order: 1;
+  order: 1; /* Media comes first */
 }
 
+/* Text styles */
 .about-text h2,
-.about-text h3 {
-  margin-bottom: 0.6rem;
-  color: #1f2a37;
+.about-text h3 { /* Heading styles */
+  margin-bottom: 0.6rem; /* Space below headings */
+  color: #1f2a37; /* Darker heading color for contrast */
 }
 
-.about-text p {
+.about-text p { /* Paragraph styles */
   line-height: 1.7;
   color: #334155;
-  max-width: 52ch;
+  max-width: 52ch; /
 }
 
-.about-link {
+.about-link { /* Link styles */
   display: inline-block;
   margin-top: 0.9rem;
   text-decoration: none;
@@ -278,44 +288,43 @@ section h2 {
   font-weight: 700;
 }
 
+/* About image styling */
 .about-media img {
   width: 100%;
   max-width: 200px;
   height: auto;
   display: block;
   margin: 0 auto;
-}
-.about-media img {
-    background-color: #EEF6FF;
-    border-radius: 24px;
-    padding: 1.2rem;
-}
-.about-media img {
-    box-shadow: inset 0 0 0 999px #EEF6FF;
-}
-.about-media {
-    background: #EEF6FF;
-    border-radius: 24px;
-    padding: 1rem;
-}
-.about-media img {
-    background: transparent;
-    padding: 0;
+
+  /* Soft framed look */
+  border-radius: 24px;
+  background: transparent;
+  padding: 0;
+  box-shadow: inset 0 0 0 999px #EEF6FF;
 }
 
-/* אנימציית כניסה עדינה */
+/* Image container */
+.about-media {
+  background: #EEF6FF;
+  border-radius: 24px;
+  padding: 1rem;
+}
+
+
+/* Scroll reveal animation */
 .reveal {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+/* When visible, reset to normal */
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* רספונסיביות */
+/* Responsive adjustments for About cards */
 @media (max-width: 900px) {
   .about-item,
   .about-item.reverse {
@@ -324,33 +333,36 @@ section h2 {
 
   .about-item.reverse .about-text,
   .about-item.reverse .about-media {
-    order: initial;
+    order: initial; /* Remove the “swap” on mobile */
   }
 
   .about-text p {
-    max-width: 100%;
+    max-width: 100%; /* Full width on mobile */
   }
 
   .about-media img {
-    max-width: 260px;
+    max-width: 260px; /* Slightly larger on mobile */
   }
 }
 
 
 /* ================= HOW ================= */
 
+/* Section title */
 .how h2 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
     text-align: center;
 }
 
+/* Grid layout for steps */
 .steps-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1.2rem;
 }
 
+/* Individual step box styling */
 .step-box {
     background-color: #ffffff;
     border-radius: 16px;
@@ -359,8 +371,8 @@ section h2 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-/* ===== איורים לאזור "איך זה עובד" ===== */
 
+/* Step illustration */
 .step-illu {
     width: 90px;
     height: 90px;
@@ -371,12 +383,12 @@ section h2 {
     transition: transform 0.25s ease;
 }
 
-/* אנימציית hover עדינה */
+/* Step illustration hover effect */
 .step-box:hover .step-illu {
     transform: translateY(-6px);
 }
 
-/* אנימציה רציפה, עדינה ומקצועית */
+/* Continuous gentle floating animation */
 @keyframes floaty {
     0%   { transform: translateY(0); }
     50%  { transform: translateY(-4px); }
@@ -387,7 +399,7 @@ section h2 {
     animation: floaty 3.2s ease-in-out infinite;
 }
 
-/* הסטה קטנה בין האיורים כדי שלא יזוזו יחד */
+/* הסטה /* Slight delays so they don’t float in sync */
 .steps-container .step-box:nth-child(2) .step-illu {
     animation-delay: 0.3s;
 }
@@ -400,23 +412,27 @@ section h2 {
     animation-delay: 0.9s;
 }
 
-
+/* Step card hover effect */
 .step-box:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
+/* Step text styles */
+/* Icon style */
 .step-box .icon {
     font-size: 1.8rem;
     display: block;
     margin-bottom: 0.5rem;
 }
 
+/* Step heading */
 .step-box h3 {
     font-size: 1.1rem;
     margin-bottom: 0.4rem;
 }
 
+/* Step description */
 .step-box p {
     font-size: 0.95rem;
     color: #555555;
@@ -424,6 +440,7 @@ section h2 {
 
 /* ================= CONTACT ================= */
 
+/* Contact section styling */
 .contact {
     background: linear-gradient(135deg, #AEE2FF, #FFA559);
     border-radius: 18px;
@@ -432,6 +449,7 @@ section h2 {
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
+/* Contact headings */
 .contact h2,
 .contact h4 {
     font-size: 1.4rem;
@@ -439,6 +457,7 @@ section h2 {
     text-align: center;
 }
 
+/* Contact form layout */
 #contactForm {
     display: flex;
     flex-direction: column;
@@ -447,6 +466,7 @@ section h2 {
     margin: 0 auto;
 }
 
+/* Inputs styling */
 #contactForm input,
 #contactForm textarea {
     border: 1px solid #cccccc;
@@ -457,9 +477,10 @@ section h2 {
 
 #contactForm textarea {
     min-height: 55px;
-    resize: vertical;
+    resize: vertical; /* Allows user to expand */
 }
 
+/* Submit button styling */
 #contactForm button {
     background-color: #FFA559;
     border: none;
@@ -472,6 +493,7 @@ section h2 {
     transition: background-color 0.15s ease, transform 0.15s ease;
 }
 
+/* Submit button hover effect */
 #contactForm button:hover {
     background-color: #FFBE85;
     transform: scale(1.02);
@@ -479,8 +501,9 @@ section h2 {
 
 /* ================= MODAL ================= */
 
+/* Full-screen overlay */
 .modal {
-    display: none;
+    display: none; /* Hidden by default */
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.45);
@@ -488,7 +511,7 @@ section h2 {
     align-items: center;
     justify-content: center;
 }
-
+/* Modal box */
 .modal-content {
     background: #ffffff;
     padding: 1.8rem 2rem;
@@ -500,22 +523,25 @@ section h2 {
 }
 
 .modal-content p {
-    color: #fa1606;
+    color: #fa1606; /* Error-ish color */
     font-size: 1.1rem;
     font-weight: 500;
     margin-bottom: 1.2rem;
 }
 /* ================= QUIZ PAGE ================= */
 
+/* Section layout */
 .quiz-section {
-  padding: 2rem 1.5rem 3rem;
+  padding: 2rem 1.5rem 3rem; /* Slightly different padding than generic sections */
 }
 
+/* Section title */
 .quiz-section h2 {
   text-align: center;
   margin-bottom: 0.6rem;
 }
 
+/* Form layout */
 .quiz-form {
   max-width: 900px;
   margin: 0 auto;
@@ -523,7 +549,7 @@ section h2 {
   gap: 1.2rem;
 }
 
-/* כל קבוצה ככרטיסיה */
+/* Quiz group box */
 .quiz-group {
   background: rgba(255,255,255,0.85);
   border: 1px solid rgba(0,0,0,0.06);
@@ -532,29 +558,33 @@ section h2 {
   box-shadow: 0 8px 22px rgba(0,0,0,0.06);
 }
 
+/* Quiz group title */
 .quiz-group h3 {
   margin-bottom: 1rem;
   font-size: 1.1rem;
   color: #1f2a37;
 }
 
-/* שדה אחד בשורה, בלי יישור מוזר */
+/* One field per row */
 .field-row {
   display: grid;
   gap: 0.45rem;
   margin-bottom: 0.95rem;
 }
 
+/* No margin on last field */
 .field-row:last-child {
   margin-bottom: 0;
 }
 
+/* Field label */
 .field-row label {
   font-weight: 700;
   font-size: 0.95rem;
   color: #334155;
 }
 
+/* Inputs, selects, textareas */
 .field-row input,
 .field-row select,
 .field-row textarea {
@@ -572,7 +602,7 @@ section h2 {
   resize: vertical;
 }
 
-/* פוקוס כמו מוצר אמיתי */
+/* Focus styles */
 .field-row input:focus,
 .field-row select:focus,
 .field-row textarea:focus {
@@ -580,17 +610,19 @@ section h2 {
   box-shadow: 0 0 0 4px rgba(255,165,89,0.18);
 }
 
+/* Error and Validation styles */
 .input-error {
   border-color: #b42318 !important;
   box-shadow: 0 0 0 4px rgba(180,35,24,0.12) !important;
 }
 
+/* Error message */
 .field-error {
   color: #b42318;
   font-size: 0.85rem;
 }
 
-/* כפתורים */
+/* Quiz action buttons container */
 .quiz-actions {
   display: flex;
   justify-content: center;
@@ -599,43 +631,58 @@ section h2 {
   margin-top: 0.4rem;
 }
 
+/* Quiz actions area */
 .quiz-actions .btn {
   min-width: 320px;
 }
 
+/* Secondary button style */
 .secondary-btn {
   background: rgba(255,255,255,0.75);
   border: 1px solid rgba(0,0,0,0.10);
-  padding: 0.9rem 1.2rem;
   border-radius: 999px;
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
+/* Secondary button hover effect */
 .secondary-btn:hover {
   background: rgba(255,165,89,0.18);
   transform: translateY(-1px);
 }
 
-/* מובייל */
+/* Responsive adjustments */
 @media (max-width: 640px) {
   .quiz-actions .btn {
     width: 100%;
     min-width: unset;
   }
+
+  /* Secondary buttons full width on small screens */
   .secondary-btn {
     width: 100%;
   }
 }
 
+/* Padding adjustments for buttons */
+.quiz-actions .secondary-btn {
+  padding: 0.9rem 1.2rem;
+}
 
 /* ================= RESULTS PAGE ================= */
 
+/* Section layout */
 .results-section {
   padding: 2rem 1.5rem 3rem;
 }
 
+/* Section title */
+.results-actions .secondary-btn {
+  padding: 0.7rem 1rem;
+}
+
+/* User preferences summary card */
 .user-summary {
   background: rgba(255,255,255,0.75);
   border: 1px solid rgba(0,0,0,0.06);
@@ -645,6 +692,7 @@ section h2 {
   box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
+/* Results grid layout */
 .results-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -652,6 +700,7 @@ section h2 {
   margin-top: 1rem;
 }
 
+/* Individual pet card */
 .pet-card {
   background: rgba(255,255,255,0.9);
   border: 1px solid rgba(0,0,0,0.06);
@@ -662,6 +711,7 @@ section h2 {
   flex-direction: column;
 }
 
+/* Pet image */
 .pet-card img {
   width: 100%;
   height: 200px;
@@ -669,11 +719,13 @@ section h2 {
   display: block;
 }
 
+/* Pet name */
 .pet-card h3 {
   padding: 0.9rem 1rem 0.3rem;
   font-size: 1.1rem;
 }
 
+/* Pet details */
 .pet-details {
   padding: 0 1rem 1rem;
   display: grid;
@@ -682,6 +734,7 @@ section h2 {
   line-height: 1.5;
 }
 
+/* Pet action button container */
 .pet-actions {
   margin-top: auto;
   padding: 0 1rem 1rem;
@@ -689,6 +742,7 @@ section h2 {
   justify-content: center;
 }
 
+/* Primary CTA button style */
 .primary-btn {
   background-color: #FFA559;
   border: none;
@@ -701,26 +755,13 @@ section h2 {
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
+/* Primary button hover effect */
 .primary-btn:hover {
   background-color: #FFBE85;
   transform: scale(1.02);
 }
 
-.secondary-btn {
-  background: rgba(255,255,255,0.75);
-  border: 1px solid rgba(0,0,0,0.10);
-  padding: 0.7rem 1rem;
-  border-radius: 999px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.15s ease;
-}
-
-.secondary-btn:hover {
-  background: rgba(255,165,89,0.18);
-  transform: translateY(-1px);
-}
-
+/* Results action buttons container */
 .results-actions {
   display: flex;
   gap: 0.7rem;
@@ -729,6 +770,7 @@ section h2 {
   flex-wrap: wrap;
 }
 
+/* No results message */
 .no-results-message {
   margin-top: 1.2rem;
   text-align: center;
@@ -736,25 +778,27 @@ section h2 {
   font-weight: 700;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* Responsive grid for results */
+@media (max-width: 900px) { /* Medium screens */
   .results-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on medium screens */
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 560px) { /* Small screens */
   .results-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* 1 column on small screens */
   }
 }
 
-/* ================= ADOPT UI ================= */
+/* ================= ADOPT ================= */
 
+/* Page layout */
 .adopt-page {
   padding: 2rem 1.5rem 3rem;
 }
 
+/* Adopt page two-column layout */
 .adopt-layout {
   max-width: 1100px;
   margin: 0 auto;
@@ -764,11 +808,13 @@ section h2 {
   align-items: start;
 }
 
+/* Pet preview sticky on desktop */
 .adopt-side {
   position: sticky;
   top: 130px;
 }
 
+/* Pet preview card */
 .pet-preview {
   background: rgba(255,255,255,0.92);
   border: 1px solid rgba(0,0,0,0.06);
@@ -777,14 +823,15 @@ section h2 {
   box-shadow: 0 16px 38px rgba(0,0,0,0.10);
 }
 
-/* פה הקסם: רווחים בצבע של העמוד כדי שלא יראו "חיתוך" */
+/*matching the page bg so images don’t look “cut out” */
 .pet-preview__media {
   position: relative;
   background: #FFF9F0;
-  padding: 14px;
+  padding: 14px; 
 }
 
-.pet-preview__media img {
+/* Pet image styling */
+.pet-preview__media img { 
   width: 100%;
   height: 320px;
   display: block;
@@ -793,6 +840,7 @@ section h2 {
   border-radius: 16px;
 }
 
+/* Badge on top of the image */
 .pet-preview__badge {
   position: absolute;
   top: 16px;
@@ -805,17 +853,20 @@ section h2 {
   box-shadow: 0 10px 22px rgba(0,0,0,0.12);
 }
 
+/* Pet info body */
 .pet-preview__body {
   padding: 1.1rem 1.2rem;
   display: grid;
   gap: 0.9rem;
 }
 
+/* Pet name and subtitle */
 .pet-head {
   display: grid;
   gap: 0.25rem;
 }
 
+/* Pet name styling */
 .pet-name {
   font-size: 1.55rem;
   font-weight: 800;
@@ -823,6 +874,7 @@ section h2 {
   margin: 0;
 }
 
+/* Pet subtitle styling */
 .pet-sub {
   margin: 0;
   color: #475569;
@@ -830,25 +882,29 @@ section h2 {
   font-size: 0.95rem;
 }
 
+/* Pet tags container */
 .pet-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
 }
 
+/* Individual tag styling */
 .tag {
   background: rgba(174,226,255,0.30);
   border: 1px solid rgba(0,0,0,0.06);
   padding: 0.45rem 0.7rem;
-  border-radius: 999px;
+  border-radius: 999px; /* Pill shape */
   font-weight: 800;
   font-size: 0.9rem;
   color: #1f2a37;
 }
 
-.tag.ok { background: rgba(34,197,94,0.14); }
-.tag.no { background: rgba(239,68,68,0.12); }
+/* Specific tag colors */
+.tag.ok { background: rgba(34,197,94,0.14); } /* Greenish for positive tags */
+.tag.no { background: rgba(239,68,68,0.12); } /* Reddish for negative tags */
 
+/* Pet description */
 .pet-desc {
   background: rgba(255,255,255,0.70);
   border: 1px solid rgba(0,0,0,0.06);
@@ -858,6 +914,7 @@ section h2 {
   color: #334155;
 }
 
+/* Adopt form main container */
 .adopt-main {
   background: rgba(255,255,255,0.80);
   border: 1px solid rgba(0,0,0,0.06);
@@ -866,17 +923,20 @@ section h2 {
   box-shadow: 0 14px 34px rgba(0,0,0,0.06);
 }
 
+/* Adopt form layout */
 .adopt-form {
   display: grid;
   gap: 1.1rem;
 }
 
+/* Two-column grid for form fields (desktop) */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.9rem 1rem;
 }
 
+//* Quiz preferences box inside adopt page */
 .quiz-echo {
   background: rgba(174,226,255,0.16);
   border: 1px solid rgba(0,0,0,0.06);
@@ -884,12 +944,14 @@ section h2 {
   padding: 1rem;
 }
 
+/* Echo grid layout */
 .echo-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.6rem 1rem;
 }
 
+/* Individual echo row */
 .echo-row {
   display: flex;
   justify-content: space-between;
@@ -900,6 +962,7 @@ section h2 {
   padding: 0.55rem 0.7rem;
 }
 
+/* Echo label and value styles */
 .echo-label {
   font-weight: 800;
   color: #1f2a37;
@@ -909,6 +972,7 @@ section h2 {
   color: #334155;
 }
 
+/* Adopt form submit button container */
 .adopt-submit {
   display: flex;
   gap: 0.7rem;
@@ -916,19 +980,20 @@ section h2 {
   justify-content: flex-start;
 }
 
+/* Responsive adjustments for adopt page */
 @media (max-width: 980px) {
   .adopt-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column on smaller screens */
   }
   .adopt-side {
-    position: static;
-    top: auto;
+    position: static; /* Disable sticky on small screens */
+    top: auto; /* Reset top */
   }
   .form-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column for form fields */
   }
   .echo-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column for echo rows */
   }
 }
 
@@ -944,6 +1009,7 @@ footer {
 
 /* ================= RESPONSIVE ================= */
 
+/* Adjust hero text size and steps layout on smaller screens */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 1.5rem;
@@ -958,12 +1024,13 @@ footer {
     }
 }
 
+/* Single column layout for very small screens like mobile phones */
 @media (max-width: 480px) {
     .steps-container {
         grid-template-columns: 1fr;
     }
 
     section {
-        padding: 2rem 1rem;
+        padding: 2rem 1rem; /* Slightly reduced padding */
     }
 }
