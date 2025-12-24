@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl"> <!-- Hebrew language and right-to-left direction -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PET MATCH - תוצאות התאמה</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive design -->
+    <title>PET MATCH - תוצאות התאמה</title> <!-- Page title -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Link to external CSS -->
 </head>
 <body>
 
 <!-- Header --> 
 <header class="main-header">
-    <a href="index.html">
-         <img src="images/LogoHedader.png" alt="לוגו PET MATCH" class="logo">
+    <a href="index.html"> <!-- Logo linking to home page -->
+         <img src="images/LogoHedader.png" alt="לוגו PET MATCH" class="logo"> <!-- Logo image -->
     </a>
-     <!--menu -->
-    <nav class="main-nav">
+<!-- Navigation links -->
+    <nav class="main-nav"> 
     <a href="index.html#about">מי אנחנו?</a>
     <a href="index.html#how">איך זה עובד?</a>
     <a href="index.html#contact">צור קשר</a>
@@ -31,25 +31,17 @@
     <section class="results-section">
         <h2>חיות מתאימות לך</h2>
 
-        <!-- סיכום קצר של ההעדפות של המשתמש -->
-        <div class="user-summary" id="userSummary">
-            <!-- נעדכן את זה דרך JavaScript בהמשך -->
-        </div>
+    <!-- User summary and results grid -->
+        <div class="user-summary" id="userSummary"> </div>
+        <div class="results-grid" id="resultsGrid"> </div>
 
-        <!-- כאן נכניס כרטיסיות חיות דרך JS -->
-        <div class="results-grid" id="resultsGrid">
-            <!-- כרטיסיות של חיות יופיעו כאן -->
-        </div>
-
+    <!-- Action buttons -->
         <div class="results-actions">
-            <button class="secondary-btn" onclick="location.href='quiz.html'">
-                חזרה לשאלון התאמה
-            </button>
-            <button class="secondary-btn" onclick="location.href='index.html'">
-                חזרה לעמוד הבית
-            </button>
+        <button class="secondary-btn" onclick="location.href='quiz.html'"> חזרה לשאלון התאמה </button>
+        <button class="secondary-btn" onclick="location.href='index.html'"> חזרה לעמוד הבית </button>
         </div>
-
+        
+    <!-- No results message -->
         <p id="noResultsMessage" class="no-results-message" style="display:none;">
             כרגע לא מצאנו חיה שתואמת בדיוק להעדפות שלך, אפשר לנסות לעדכן את התשובות בשאלון ולנסות שוב.
         </p>
@@ -60,6 +52,6 @@
     <p>© 2025 PET MATCH - התאמה חכמה, אהבה אמיתית 🐾</p>
 </footer>
 
-<script src="js/results.js"></script>
+<script src="js/results.js"></script> <!-- Link to external JavaScript -->
 </body>
 </html>
