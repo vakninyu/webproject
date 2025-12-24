@@ -743,7 +743,194 @@ section h2 {
   }
 }
 
-@media (max-width: 560p
+@media (max-width: 560px) {
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= ADOPT UI ================= */
+
+.adopt-page {
+  padding: 2rem 1.5rem 3rem;
+}
+
+.adopt-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.adopt-side {
+  position: sticky;
+  top: 130px;
+}
+
+.pet-preview {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 16px 38px rgba(0,0,0,0.10);
+}
+
+/* פה הקסם: רווחים בצבע של העמוד כדי שלא יראו "חיתוך" */
+.pet-preview__media {
+  position: relative;
+  background: #FFF9F0;
+  padding: 14px;
+}
+
+.pet-preview__media img {
+  width: 100%;
+  height: 320px;
+  display: block;
+  object-fit: contain;
+  background: #FFF9F0;
+  border-radius: 16px;
+}
+
+.pet-preview__badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255,165,89,0.95);
+  color: #fff;
+  font-weight: 800;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.pet-preview__body {
+  padding: 1.1rem 1.2rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.pet-head {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.pet-name {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.pet-sub {
+  margin: 0;
+  color: #475569;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.pet-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.tag {
+  background: rgba(174,226,255,0.30);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #1f2a37;
+}
+
+.tag.ok { background: rgba(34,197,94,0.14); }
+.tag.no { background: rgba(239,68,68,0.12); }
+
+.pet-desc {
+  background: rgba(255,255,255,0.70);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  line-height: 1.7;
+  color: #334155;
+}
+
+.adopt-main {
+  background: rgba(255,255,255,0.80);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 22px;
+  padding: 1.2rem 1.2rem 1.3rem;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.06);
+}
+
+.adopt-form {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 1rem;
+}
+
+.quiz-echo {
+  background: rgba(174,226,255,0.16);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 18px;
+  padding: 1rem;
+}
+
+.echo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 1rem;
+}
+
+.echo-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 14px;
+  padding: 0.55rem 0.7rem;
+}
+
+.echo-label {
+  font-weight: 800;
+  color: #1f2a37;
+}
+
+.echo-value {
+  color: #334155;
+}
+
+.adopt-submit {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+@media (max-width: 980px) {
+  .adopt-layout {
+    grid-template-columns: 1fr;
+  }
+  .adopt-side {
+    position: static;
+    top: auto;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .echo-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 
 /* ================= FOOTER ================= */

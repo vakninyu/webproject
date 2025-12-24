@@ -1,19 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עמוד בקשת אימוץ</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/adopt.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PET MATCH - בקשת אימוץ</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-   <!-- Header -->
-<header class="main-header">
-    <a href="index.html">
-        <img src="images/LogoHedader.png" alt="לוגו PET MATCH" class="logo">
-    </a>
-</header>
 <body>
-    
+
+<header class="main-header">
+  <a href="index.html">
+    <img src="images/LogoHedader.png" alt="לוגו PET MATCH" class="logo">
+  </a>
+
+  <nav class="main-nav">
+    <a href="index.html#about">מי אנחנו?</a>
+    <a href="index.html#how">איך זה עובד?</a>
+    <a href="index.html#contact">צור קשר</a>
+    <a href="results.html" class="nav-cta">חזרה לתוצאות</a>
+  </nav>
+</header>
+
+<main class="adopt-page">
+  <div class="adopt-layout">
+
+    <aside class="adopt-side">
+      <div id="adoptError" class="error-message" style="display:none;">
+        לא נמצאה חיה, חזרי לתוצאות ובחרי מחדש.
+      </div>
+
+      <div id="petPreview" class="pet-preview" style="display:none;"></div>
+    </aside>
+
+    <section class="adopt-main">
+      <h2>פרטי המאמצ/ת</h2>
+
+      <form id="adoptForm" class="adopt-form">
+        <div class="form-grid">
+          <div class="field-row">
+            <label>שם מלא *</label>
+            <input type="text" name="adopterName" required>
+          </div>
+
+          <div class="field-row">
+            <label>טלפון *</label>
+            <input type="tel" name="adopterPhone" required>
+            <small id="phoneErr" class="field-error" style="display:none;"></small>
+          </div>
+
+          <div class="field-row">
+            <label>אימייל</label>
+            <input type="email" name="adopterEmail">
+          </div>
+
+          <div class="field-row">
+            <label>עיר</label>
+            <input type="text" name="adopterCity">
+          </div>
+        </div>
+
+      <div class="quiz-echo" id="quizEcho">
+  <h3>העדפות מהשאלון:</h3>
+
+  <div class="prefs-grid">
+    <div class="field-row">
+      <label for="prefLivingType">סוג מגורים</label>
+      <select id="prefLivingType" name="prefLivingType">
+        <option value="">לא צוין</option>
+        <option value="apartment">דירה בבניין</option>
+        <option value="house">בית עם חצר</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+      <label for="prefHasKids">ילדים בבית</label>
+      <select id="prefHasKids" name="prefHasKids">
+        <option value="">לא צוין</option>
+        <option value="yes">כן</option>
+        <option value="no">לא</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+      <label for="prefHasOtherPets">חיות נוספות בבית</label>
+      <select id="prefHasOtherPets" name="prefHasOtherPets">
+        <option value="">לא צוין</option>
+        <option value="yes">כן</option>
+        <option value="no">לא</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+      <label for="prefPreferredType">סוג מועדף</label>
+      <select id="prefPreferredType" name="prefPreferredType">
+        <option value="">לא משנה</option>
+        <option value="dog">כלב</option>
+        <option value="cat">חתול</option>
+        <option value="rabbit">ארנב</option>
+        <option value="other">אחר</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+      <label for="prefPreferredGender">מין מועדף</label>
+      <select id="prefPreferredGender" name="prefPreferredGender">
+        <option value="">לא משנה</option>
+        <option value="male">זכר</option>
+        <option value="female">נקבה</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+      <label for="prefPreferredAge">גיל מועדף</label>
+      <select id="prefPreferredAge" name="prefPreferredAge">
+        <option value="">לא משנה</option>
+        <option value="puppy">גור</option>
+        <option value="adult">בוגר</option>
+        <option value="senior">מבוגר</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+      <label for="prefPreferredSize">גודל מועדף</label>
+      <select id="prefPreferredSize" name="prefPreferredSize">
+        <option value="">לא משנה</option>
+        <option value="small">קטן</option>
+        <option value="medium">בינוני</option>
+        <option value="large">גדול</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+        <div class="field-row">
+          <label>הודעה לעמותה</label>
+          <textarea name="message" rows="4" placeholder="ספרו בקצרה למה אתם מתאימים לחיה הזו"></textarea>
+        </div>
+
+        <div class="adopt-submit">
+          <button type="button" class="secondary-btn" id="saveDraftBtn">שמירת טיוטה</button>
+          <button type="submit" class="btn">שליחת בקשת אימוץ</button>
+        </div>
+
+        <p id="adoptFormError" class="error-message" style="display:none;"></p>
+        <p id="adoptSuccess" class="success-message" style="display:none;">הבקשה נשלחה בהצלחה</p>
+      </form>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 PET MATCH - התאמה חכמה, אהבה אמיתית 🐾</p>
+</footer>
+
+<script src="js/adopt.js"></script>
 </body>
 </html>
