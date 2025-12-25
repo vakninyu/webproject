@@ -164,10 +164,22 @@ document.addEventListener("DOMContentLoaded", () => {
       // Start with the full list, then filter down
       let pool = allPets;
 
-      // Hard filter: preferred animal type (only if the user actually selected one)
-      if (answers.preferredType && answers.preferredType.trim() !== "") {
-        pool = pool.filter(p => p.type === answers.preferredType);
-      }
+     // Hard filter: preferred animal type
+// Apply only if the user selected a specific type
+if (answers.preferredType && answers.preferredType.trim() !== "") {
+
+  // If the user selected "other":
+  // show all animals that are NOT dog, cat, or rabbit
+  if (answers.preferredType === "other") {
+    pool = pool.filter(p =>
+      !["dog", "cat", "rabbit"].includes(p.type)
+    );
+  } 
+  // Otherwise, filter by the exact selected type
+  else {
+    pool = pool.filter(p => p.type === answers.preferredType);
+  }
+}
 
       // Hard filter: preferred gender (only if selected)
       if (answers.preferredGender && answers.preferredGender.trim() !== "") {
