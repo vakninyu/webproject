@@ -113,18 +113,18 @@ function renderResults(pets) {
 
     // Build the card HTML
     card.innerHTML = `
-      <img src="${pet.image}" alt="${pet.name}"> //image of the pet
+      <img src="${pet.image}" alt="${pet.name}"> 
       <h3>${pet.name}</h3>
-      <div class="pet-details"> //pet details
+      <div class="pet-details"> 
         <p>סוג: ${typeText}</p>
         <p>גיל: ${ageText}</p>
         <p>גודל: ${sizeText}</p>
         <p>מיקום: ${pet.location || "לא צוין"}</p>
         <p>מסתדר עם ילדים: ${kidsText}</p>
         <p>מסתדר עם חיות: ${petsText}</p>
-        <p>${pet.description || ""}</p> //pet description
+        <p>${pet.description || ""}</p> 
       </div>
-      <div class="pet-actions"> //adopt button
+      <div class="pet-actions"> 
         <button class="primary-btn" type="button" onclick="goToAdopt(${pet.id})"> 
           אני רוצה לאמץ
         </button>

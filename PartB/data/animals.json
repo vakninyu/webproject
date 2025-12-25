@@ -9,7 +9,7 @@
     "kidsFriendly": true,
     "goodWithPets": true,
     "location": "תל אביב",
-    "image": "images/Luna.jpg",
+    "image": "images/Animals/Luna.jpg",
     "description": "כלבה קטנה, אוהבת לשחק ומסתדרת מצוין עם ילדים."
   },
   {
@@ -22,7 +22,7 @@
     "kidsFriendly": true,
     "goodWithPets": false,
     "location": "רמת גן",
-    "image": "images/Max.jpg",
+    "image": "images/Animals/Max.jpg",
     "description": "כלב אנרגטי שאוהב ריצות וטיולים ארוכים."
   },
   {
@@ -35,7 +35,7 @@
     "kidsFriendly": false,
     "goodWithPets": true,
     "location": "חולון",
-    "image": "images/Mitza.webp",
+    "image": "images/Animals/Mitza.webp",
     "description": "חתולה שקטה ועצמאית, אוהבת פינות שקטות בבית."
   },
   {
@@ -48,7 +48,7 @@
     "kidsFriendly": true,
     "goodWithPets": true,
     "location": "ראשון לציון",
-    "image": "images/Tomi1.jpg",
+    "image": "images/Animals/Tomi1.jpg",
     "description": "חתול חברותי, מסתדר עם ילדים ואוהב לקבל ליטופים."
   },
   {
@@ -62,7 +62,7 @@
     "kidsFriendly": true,
     "goodWithPets": true,
     "location": "פתח תקווה",
-    "image": "images/Boni.jpg",
+    "image": "images/Animals/Boni.jpg",
     "description": "כלבה שובבה וחכמה, אוהבת משחקים ומתאימה לבית פעיל."
   },
   {
@@ -76,7 +76,7 @@
     "kidsFriendly": true,
     "goodWithPets": true,
     "location": "חיפה",
-    "image": "images/Rocki.jpg",
+    "image": "images/Animals/Rocki.jpg",
     "description": "כלב גדול ועדין, אוהב ליטופים וטיולים רגועים."
   },
   {
@@ -90,7 +90,7 @@
     "kidsFriendly": true,
     "goodWithPets": true,
     "location": "תל אביב",
-    "image": "images/Nalla.jpeg",
+    "image": "images/Animals/Nalla.jpeg",
     "description": "חתולה סקרנית וחברותית, מסתדרת עם ילדים ועם חתולים נוספים."
   },
   {
@@ -104,7 +104,7 @@
     "kidsFriendly": false,
     "goodWithPets": true,
     "location": "ראשון לציון",
-    "image": "images/Leo.jpg",
+    "image": "images/Animals/Leo.jpg",
     "description": "חתול רגוע שמחפש בית שקט, אוהב פינוקים ושגרה."
   },
   {
@@ -118,7 +118,7 @@
     "kidsFriendly": true,
     "goodWithPets": false,
     "location": "רמת גן",
-    "image": "images/Sunny.jpg",
+    "image": "images/Animals/Sunny.jpg",
     "description": "גור מתוק ומלא אנרגיה, צריך הרבה תשומת לב ופריקת אנרגיה."
   },
   {
@@ -132,7 +132,7 @@
     "kidsFriendly": true,
     "goodWithPets": false,
     "location": "חולון",
-    "image": "images/Moka.jpeg",
+    "image": "images/Animals/Moka.jpeg",
     "description": "חתולה עדינה ומאוד אנושית, מעדיפה להיות “המלכה” בבית."
   },
   {
@@ -146,7 +146,7 @@
     "kidsFriendly": true,
     "goodWithPets": true,
     "location": "אשדוד",
-    "image": "images/Bruno.jpg",
+    "image": "images/Animals/Bruno.jpg",
     "description": "כלב רגוע ונוח, מתאים למשפחה או לזוג שמחפשים חבר ביתי."
   },
   {
@@ -160,7 +160,7 @@
     "kidsFriendly": true,
     "goodWithPets": true,
     "location": "באר שבע",
-    "image": "images/Popi.png",
+    "image": "images/Animals/Popi.png",
     "description": "חתולה מבוגרת ומתוקה, אוהבת שקט וחיבוקים."
   },
 {
@@ -173,7 +173,59 @@
   "kidsFriendly": true,
   "goodWithPets": true,
   "location": "דירה / בית",
-  "image": "images/Sheleg.jpg",
+  "image": "images/Animals/Sheleg.jpg",
   "description": "ארנב עדין וחברותי, מסתדר עם ילדים ועם חיות נוספות, מתאים גם למגורים בדירה."
+},
+{
+  "id": 14,
+  "name": "קוקי",
+  "type": "rabbit",
+  "gender": "female",
+  "ageGroup": "adult",
+  "size": "small",
+  "kidsFriendly": true,
+  "goodWithPets": false,
+  "location": "הרצליה",
+  "image": "images/Animals/Cookie.jpg",
+  "description": "ארנבת רגועה וחמודה, אוהבת ליטופים וסביבה שקטה."
+},
+{
+  "id": 15,
+  "name": "צ'יקו",
+  "type": "parrot",
+  "gender": "male",
+  "ageGroup": "young",
+  "size": "small",
+  "kidsFriendly": true,
+  "goodWithPets": false,
+  "location": "תל אביב",
+  "image": "images/Animals/Chiko.jpg",
+  "description": "תוכי חכם וסקרן, אוהב תשומת לב ויודע לחקות קולות."
+},
+{
+  "id": 16,
+  "name": "נשנש",
+  "type": "hamster",
+  "gender": "male",
+  "ageGroup": "adult",
+  "size": "small",
+  "kidsFriendly": false,
+  "goodWithPets": false,
+  "location": "פתח תקווה",
+  "image": "images/Animals/Nashnash.jpg",
+  "description": "אוגר חמוד ופעיל בעיקר בלילה, מתאים לילדים גדולים ואחראיים."
+},
+{
+  "id": 17,
+  "name": "לולי",
+  "type": "guinea_pig",
+  "gender": "female",
+  "ageGroup": "young",
+  "size": "small",
+  "kidsFriendly": true,
+  "goodWithPets": true,
+  "location": "ראשון לציון",
+  "image": "images/Animals/Luli.jpeg",
+  "description": "שרקנית מתוקה וחברותית, אוהבת חברה וקולות רכים."
 }
 ]
