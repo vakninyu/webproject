@@ -980,6 +980,31 @@ section h2 {
   justify-content: flex-start;
 }
 
+/* Adoption success message */
+#adoptSuccess {
+  display: none;  /* Hidden by default */
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(46, 125, 50, 0.35);
+  background: rgba(46, 125, 50, 0.12);
+  color: #1b5e20;
+  font-weight: 700;
+  text-align: center;
+}
+
+#adoptFormError {
+  display: none;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(198, 40, 40, 0.35);
+  background: rgba(198, 40, 40, 0.10);
+  color: #b71c1c;
+  font-weight: 700;
+  text-align: center;
+}
+
 /* Responsive adjustments for adopt page */
 @media (max-width: 980px) {
   .adopt-layout {
