@@ -181,6 +181,17 @@ if (answers.preferredType && answers.preferredType.trim() !== "") {
   }
 }
 
+const dbStatus = document.getElementById("dbStatus");
+const submissionId = localStorage.getItem("submissionId");
+
+if (dbStatus) {
+  if (submissionId) {
+    dbStatus.textContent = `הטופס נשמר בהצלחה. מספר פנייה: ${submissionId}`;
+  } else {
+    dbStatus.textContent = "הטופס מוצג ללא שמירה למסד נתונים.";
+  }
+}
+
       // Hard filter: preferred gender (only if selected)
       if (answers.preferredGender && answers.preferredGender.trim() !== "") {
         pool = pool.filter(p => p.gender === answers.preferredGender);

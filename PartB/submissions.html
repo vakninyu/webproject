@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetMatch - Submissions</title>
+</head>
+<body>
+  <h1>כל הפניות שנשמרו</h1>
+  <pre id="out">טוען...</pre>
+
+  <script>
+    fetch("/api/quiz/latest")
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById("out").textContent = JSON.stringify(data, null, 2);
+      })
+      .catch(() => {
+        document.getElementById("out").textContent = "שגיאה בטעינה";
+      });
+  </script>
+</body>
+</html>

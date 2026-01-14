@@ -55,18 +55,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ==== Submit handler ==== */
-  quizForm.addEventListener("submit", (event) => {
-    event.preventDefault(); // Prevent default form submission
-    // Clear previous error messages
+   /* ==== Submit handler ==== */
+  quizForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
     quizError.style.display = "none";
     quizError.textContent = "";
 
-    /* ==== Strict phone validationwith inline error message ==== */
+    // Save original button text FIRST (so we can restore it on errors)
+    const originalText = submitBtn.textContent;
+
+    /* ==== Strict phone validation with inline error message ==== */
     const phoneInput = quizForm.querySelector('input[name="phone"]');
     const phoneError = phoneInput?.parentElement?.querySelector(".field-error");
 
-    // Clear previous phone error
     if (phoneError) {
       phoneError.style.display = "none";
       phoneError.textContent = "";
@@ -74,44 +76,98 @@ document.addEventListener("DOMContentLoaded", () => {
     phoneInput.classList.remove("input-error");
 
     const phoneValue = phoneInput.value.trim();
-    const phoneRegex = /^0\d{9}$/; // Must start with 0 and be 10 digits (Israeli phone number format)
+    const phoneRegex = /^0\d{9}$/;
 
-    // Validate phone number
     if (!phoneRegex.test(phoneValue)) {
       if (phoneError) {
         phoneError.textContent = "מספר הטלפון אינו תקין. יש להזין 10 ספרות ולהתחיל ב־0.";
-        phoneError.style.display = "block"; // Show inline error message
+        phoneError.style.display = "block";
       }
-      phoneInput.classList.add("input-error"); // Highlight the input with error
-      phoneInput.focus(); // Focus the phone input for user convenience
+      phoneInput.classList.add("input-error");
+      phoneInput.focus();
       return;
     }
 
-    /* ==== Required fields validation using native HTML validation ===== */
+    /* ==== Required fields validation ==== */
     if (!quizForm.checkValidity()) {
       quizError.textContent = "יש שדות חובה שלא מולאו. אנא בדקו את הטופס ונסו שוב.";
-      quizError.style.display = "block"; // Show global error message
-
-      const firstInvalid = quizForm.querySelector(":invalid"); // Focus the first invalid field
-      if (firstInvalid) firstInvalid.focus(); // Focus the first invalid field
+      quizError.style.display = "block";
+      const firstInvalid = quizForm.querySelector(":invalid");
+      if (firstInvalid) firstInvalid.focus();
       return;
     }
 
-    /* ==== Save answers to localStorage ==== */
-    const formData = new FormData(quizForm); // Collect form data
-    const answers = Object.fromEntries(formData.entries()); // Convert to plain object
-    localStorage.setItem("quizAnswers", JSON.stringify(answers)); // Save to localStorage
+    /* ==== Collect answers ==== */
+    const formData = new FormData(quizForm);
+    const answers = Object.fromEntries(formData.entries());
 
-     /* ===== User experience feedback (short loading state) ===== */
-    submitBtn.disabled = true; // Disable the submit button to prevent multiple clicks
-    const originalText = submitBtn.textContent; // Save original button text
-    submitBtn.textContent = "טוען התאמות..."; // Show loading text
+    // Keep localStorage behavior (your existing flow)
+    localStorage.setItem("quizAnswers", JSON.stringify(answers));
 
-     /* ==== Redirect to results page ==== */
-    setTimeout(() => { 
-      submitBtn.disabled = false; // Re-enable the button
-      submitBtn.textContent = originalText; // Restore original button text
-      window.location.href = "results.html"; // Redirect to results page
-    }, 1000); 
+    /* ==== Prepare payload for server (match DB columns) ==== */
+    const normalizeNoMatter = (v) => {
+      if (!v) return "no_matter";
+      const s = String(v).trim().toLowerCase();
+      if (s === "no_matter" || s === "nomatter" || s === "any" || s === "all") return "no_matter";
+      return v;
+    };
+
+    // Map from your HTML field names to DB enum columns
+    const payload = {
+      preferred_type: normalizeNoMatter(answers.preferredType),
+      age_group: normalizeNoMatter(answers.preferredAge),
+      size: normalizeNoMatter(answers.preferredSize),
+
+      // Put some free text into notes (you can change priority)
+      notes: answers.idealPet || answers.experienceDetails || answers.adoptionReason || null,
+
+      // Store EVERYTHING in JSON too
+      answers_json: answers
+    };
+
+    /* ==== Send to server ==== */
+    submitBtn.disabled = true;
+    submitBtn.textContent = "שומר לשרת...";
+
+    try {
+      const res = await fetch("/api/quiz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.ok) {
+        console.error("Server error:", data);
+        quizError.textContent = "שגיאה בשמירה למסד הנתונים, נסו שוב.";
+        quizError.style.display = "block";
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
+      // Useful for debugging, if you want later
+      localStorage.setItem("submissionId", data.id);
+
+    } catch (e) {
+      console.error(e);
+      quizError.textContent = "לא הצלחנו להתחבר לשרת, בדקו שהשרת רץ ונסו שוב.";
+      quizError.style.display = "block";
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      return;
+    }
+
+    /* ===== User experience feedback (short loading state) ===== */
+    submitBtn.textContent = "טוען התאמות...";
+
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      window.location.href = "results.html";
+    }, 1000);
+  });
+
   });
 });
