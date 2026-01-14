@@ -142,42 +142,72 @@ function goToAdopt(petId) {
   window.location.href = "adopt.html"; // Navigate to the adopt page
 }
 
+async function getLatestSubmission() {
+  try {
+    const res = await fetch("/api/quiz/latest");
+    const data = await res.json();
+    if (!res.ok || !data.ok || !data.rows || data.rows.length === 0) return null;
+    return data.rows[0];
+  } catch (e) {
+    console.error("Failed to fetch latest submission:", e);
+    return null;
+  }
+}
+
 // Main flow: run when results page is ready
-document.addEventListener("DOMContentLoaded", () => {
-  // Load quiz answers from localStorage (if the user filled the quiz before)
-  const answersJson = localStorage.getItem("quizAnswers"); // Get saved answers
-  const answers = answersJson ? JSON.parse(answersJson) : null; // Parse answers or null
+document.addEventListener("DOMContentLoaded", async () => {
+  // 1) localStorage fallback
+  const answersJson = localStorage.getItem("quizAnswers");
+  const answers = answersJson ? JSON.parse(answersJson) : null;
+
+  // 2) DB preferred source
+  const latest = await getLatestSubmission();
+
+  // 3) merge: keep all fields from localStorage, but override key filters from DB if exists
+  const mergedAnswers = answers ? { ...answers } : {};
+
+  if (latest) {
+    mergedAnswers.preferredType = latest.preferred_type === "no_matter" ? "" : latest.preferred_type;
+    mergedAnswers.preferredAge  = latest.age_group === "no_matter" ? "" : latest.age_group;
+    mergedAnswers.preferredSize = latest.size === "no_matter" ? "" : latest.size;
+
+    // keep submission id for the banner
+    localStorage.setItem("submissionId", String(latest.id));
+  }
 
   // Show the summary section based on the quiz answers
-  renderUserSummary(answers);
+  renderUserSummary(mergedAnswers);
 
   // Load all pets data from the JSON file
   fetch("data/animals.json")
     .then(response => response.json())
     .then(allPets => {
-      // If there are no answers, just show all pets
-      if (!answers) {
-        renderResults(allPets);
-        return;
-      }
+    // If there are no saved quiz answers in localStorage
+    // and no latest submission found in the database,
+    // show all pets without applying any filters
+     const hasAnyAnswers = answers && Object.keys(answers).length > 0;
+if (!hasAnyAnswers && !latest) {
+  renderResults(allPets);
+  return;
+}
 
       // Start with the full list, then filter down
       let pool = allPets;
 
      // Hard filter: preferred animal type
 // Apply only if the user selected a specific type
-if (answers.preferredType && answers.preferredType.trim() !== "") {
+if (mergedAnswers.preferredType && mergedAnswers.preferredType.trim() !== "") {
 
   // If the user selected "other":
   // show all animals that are NOT dog, cat, or rabbit
-  if (answers.preferredType === "other") {
+  if (mergedAnswers.preferredType === "other") {
     pool = pool.filter(p =>
       !["dog", "cat", "rabbit"].includes(p.type)
     );
   } 
   // Otherwise, filter by the exact selected type
   else {
-    pool = pool.filter(p => p.type === answers.preferredType);
+    pool = pool.filter(p => p.type === mergedAnswers.preferredType);
   }
 }
 
@@ -193,12 +223,12 @@ if (dbStatus) {
 }
 
       // Hard filter: preferred gender (only if selected)
-      if (answers.preferredGender && answers.preferredGender.trim() !== "") {
-        pool = pool.filter(p => p.gender === answers.preferredGender);
+      if (mergedAnswers.preferredGender && mergedAnswers.preferredGender.trim() !== "") {
+        pool = pool.filter(p => p.gender === mergedAnswers.preferredGender);
     }
 
       // Apartment rule: remove large animals
-      if (answers.livingType === "apartment") {
+      if (mergedAnswers.livingType === "apartment") {
         pool = pool.filter(p => p.size !== "large");
       }
 
@@ -210,7 +240,7 @@ if (dbStatus) {
 
       // Score and sort the remaining pets
       const scored = pool
-        .map(p => ({ pet: p, score: scorePet(p, answers) }))
+        .map(p => ({ pet: p, score: scorePet(p, mergedAnswers) }))
         .sort((a, b) => b.score - a.score);
 
       // Render pets in best-match order

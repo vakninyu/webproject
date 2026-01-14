@@ -112,14 +112,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return v;
     };
 
-    // Map from your HTML field names to DB enum columns
-  const payload = {
+// Map from your HTML field names to DB enum columns
+const payload = {
   preferred_type: answers.preferredType || "no_matter",
   age_group: answers.preferredAge || "no_matter",
   size: answers.preferredSize || "no_matter",
-  notes: answers.idealPet || answers.adoptionReason || null,
+  notes: answers.idealPet || answers.adoptionReason || "",
   answers_json: answers
 };
+
 
     /* ==== Send to server ==== */
     submitBtn.disabled = true;

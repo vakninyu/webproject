@@ -5,7 +5,8 @@ import mysql from "mysql2/promise";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const app = express();
+const app = express(); 
+const PORT = 3000;
 
 // middleware
 app.use(express.urlencoded({ extended: true }));
@@ -75,7 +76,6 @@ app.post("/api/quiz", async (req, res) => {
 });
 
 
-const PORT = 3000;
 // read last submissions (debug)
 app.get("/api/quiz/latest", async (req, res) => {
   try {
