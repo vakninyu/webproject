@@ -40,6 +40,7 @@ app.get("/health", (req, res) => {
 
 // save quiz answers
 app.post("/api/quiz", async (req, res) => {
+    console.log("POST /api/quiz body:", req.body);
   try {
     const preferred_type = req.body.preferred_type ?? req.body.preferredType;
     const age_group = req.body.age_group ?? req.body.ageGroup;

@@ -113,17 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Map from your HTML field names to DB enum columns
-    const payload = {
-      preferred_type: normalizeNoMatter(answers.preferredType),
-      age_group: normalizeNoMatter(answers.preferredAge),
-      size: normalizeNoMatter(answers.preferredSize),
-
-      // Put some free text into notes (you can change priority)
-      notes: answers.idealPet || answers.experienceDetails || answers.adoptionReason || null,
-
-      // Store EVERYTHING in JSON too
-      answers_json: answers
-    };
+  const payload = {
+  preferred_type: answers.preferredType || "no_matter",
+  age_group: answers.preferredAge || "no_matter",
+  size: answers.preferredSize || "no_matter",
+  notes: answers.idealPet || answers.adoptionReason || null,
+  answers_json: answers
+};
 
     /* ==== Send to server ==== */
     submitBtn.disabled = true;
@@ -170,4 +166,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   });
-});
