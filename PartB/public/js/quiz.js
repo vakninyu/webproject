@@ -1,36 +1,32 @@
-// Run the script only after the DOM is fully loaded
+// Run only after the page HTML is ready
 document.addEventListener("DOMContentLoaded", () => {
-
-  // Main quiz elements
+  // ========= Grab elements =========
   const quizForm = document.getElementById("quizForm");
   const quizError = document.getElementById("quizError");
   const submitBtn = quizForm?.querySelector('button[type="submit"]');
   const resetBtn = document.getElementById("resetQuizBtn");
 
-  // Safety check: stop execution if critical elements are missing
+  // Stop if something critical is missing
   if (!quizForm || !quizError || !submitBtn) {
     console.warn("Quiz form elements are missing. Check your HTML.");
     return;
   }
 
-  // Hide global error message on initial page load
+  // Hide the global error on load
   quizError.style.display = "none";
   quizError.textContent = "";
 
-  /* ======= Restore saved answers (if exist) ======== */
-
-  // Try to load previous quiz answers from localStorage
+  // ========= Restore saved answers from localStorage =========
   const savedAnswers = localStorage.getItem("quizAnswers");
   if (savedAnswers) {
     try {
       const answers = JSON.parse(savedAnswers);
 
-      // Loop over saved answers and restore each field
+      // Put each saved value back into the matching form field
       Object.keys(answers).forEach((key) => {
         const field = quizForm.elements[key];
-        if (!field) return; 
+        if (!field) return;
 
-        // Support for future checkbox / radio inputs
         if (field.type === "checkbox" || field.type === "radio") {
           field.checked = field.value === answers[key];
         } else {
@@ -42,30 +38,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* ======= Reset quiz ========= */
-
-  // Clear quiz data and reset the form
+  // ========= Reset button =========
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
-      localStorage.removeItem("quizAnswers"); // Remove saved data
-      quizForm.reset(); // Reset all form fields
+      localStorage.removeItem("quizAnswers");
+      quizForm.reset();
       quizError.style.display = "none";
       quizError.textContent = "";
       alert("השאלון אופס בהצלחה");
     });
   }
 
-   /* ==== Submit handler ==== */
+  // ========= Submit handler =========
   quizForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // we handle submit with JS (fetch), not HTML action
 
+    // Clear global error
     quizError.style.display = "none";
     quizError.textContent = "";
 
-    // Save original button text FIRST (so we can restore it on errors)
+    // Save original button text so we can restore it
     const originalText = submitBtn.textContent;
 
-    /* ==== Strict phone validation with inline error message ==== */
+    // ========= Phone validation (custom) =========
     const phoneInput = quizForm.querySelector('input[name="phone"]');
     const phoneError = phoneInput?.parentElement?.querySelector(".field-error");
 
@@ -88,41 +83,38 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    /* ==== Required fields validation ==== */
+    // ========= Required fields validation (HTML built-in) =========
     if (!quizForm.checkValidity()) {
       quizError.textContent = "יש שדות חובה שלא מולאו. אנא בדקו את הטופס ונסו שוב.";
       quizError.style.display = "block";
+
       const firstInvalid = quizForm.querySelector(":invalid");
       if (firstInvalid) firstInvalid.focus();
       return;
     }
 
-    /* ==== Collect answers ==== */
+    // ========= Collect all answers from the form =========
     const formData = new FormData(quizForm);
     const answers = Object.fromEntries(formData.entries());
 
-    // Keep localStorage behavior (your existing flow)
+    // Save answers so they can be restored if the user returns to this page
     localStorage.setItem("quizAnswers", JSON.stringify(answers));
 
-    /* ==== Prepare payload for server (match DB columns) ==== */
-    const normalizeNoMatter = (v) => {
-      if (!v) return "no_matter";
-      const s = String(v).trim().toLowerCase();
-      if (s === "no_matter" || s === "nomatter" || s === "any" || s === "all") return "no_matter";
-      return v;
+    // ========= Normalize values for "no preference" =========
+    // (server / DB expects a string even when the user did not choose)
+    const normalizeNoMatter = (v) => (v ? v : "no_matter");
+
+    // ========= Build the payload for the server =========
+    // We send only the fields the DB needs + a full snapshot in answers_json
+    const payload = {
+      preferred_type: normalizeNoMatter(answers.preferredType),
+      age_group: normalizeNoMatter(answers.preferredAge),
+      size: normalizeNoMatter(answers.preferredSize),
+      notes: answers.idealPet || answers.adoptionReason || "",
+      answers_json: answers
     };
 
-// Map from your HTML field names to DB enum columns
-const payload = {
-  preferred_type: answers.preferredType || "no_matter",
-  age_group: answers.preferredAge || "no_matter",
-  size: answers.preferredSize || "no_matter",
-  notes: answers.idealPet || answers.adoptionReason || "",
-  answers_json: answers
-};
-
-
-    /* ==== Send to server ==== */
+    // ========= Send to server =========
     submitBtn.disabled = true;
     submitBtn.textContent = "שומר לשרת...";
 
@@ -144,7 +136,7 @@ const payload = {
         return;
       }
 
-      // Useful for debugging, if you want later
+      // Save the DB row id (optional debug)
       localStorage.setItem("submissionId", data.id);
 
     } catch (e) {
@@ -156,7 +148,7 @@ const payload = {
       return;
     }
 
-    /* ===== User experience feedback (short loading state) ===== */
+    // ========= UX: short loading then go to results =========
     submitBtn.textContent = "טוען התאמות...";
 
     setTimeout(() => {
@@ -165,5 +157,4 @@ const payload = {
       window.location.href = "results.html";
     }, 1000);
   });
-
-  });
+});

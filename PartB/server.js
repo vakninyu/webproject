@@ -19,10 +19,11 @@ const app = express();
 const PORT = 3000;
 
 // ==========================
-// Middleware (request parsing)
+// Middleware 
 // ==========================
 
 // Lets the server read data sent from regular HTML forms
+// Built-in Express middleware, replaces the old body-parser package
 app.use(express.urlencoded({ extended: true }));
 
 // Lets the server read JSON data
