@@ -6,6 +6,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import express from "express";
 import mysql from "mysql2/promise";
+import { insertQuizSubmission, getLatestQuizSubmissions } from "./crud.js";
+
 
 // ==========================
 // App + Paths (ES Modules)
@@ -64,69 +66,43 @@ const pool = mysql.createPool({
 // Routes
 // ==========================
 
-// Health check route, quick way to see the server is alive
-// http://localhost:3000/health
-app.get("/health", (req, res) => {
-  res.send("Server is running");
-});
-
-// Save quiz answers into the database
-// This endpoint expects a JSON body with required fields:
-// preferred_type, age_group, size
-// POST http://localhost:3000/api/quiz
-app.post("/api/quiz", async (req, res) => {
-  console.log("POST /api/quiz body:", req.body);
-
+app.get("/api/quiz/latest", async (req, res) => {
   try {
-    // Support two naming styles (snake_case / camelCase)
-    const preferred_type = req.body.preferred_type ?? req.body.preferredType;
-    const age_group = req.body.age_group ?? req.body.ageGroup;
-    const size = req.body.size;
-
-    // Optional fields
-    const notes = req.body.notes ?? null;
-    const answers_json = req.body.answers_json ?? req.body.answersJson ?? null;
-
-    // Validate required fields
-    if (!preferred_type || !age_group || !size) {
-      return res.status(400).json({ ok: false, error: "Missing required fields" });
-    }
-
-    // Insert into DB (parameterized query prevents SQL injection)
-    const sql = `
-      INSERT INTO quiz_submissions
-      (preferred_type, age_group, size, notes, answers_json)
-      VALUES (?, ?, ?, ?, ?)
-    `;
-
-    const values = [
-      preferred_type,
-      age_group,
-      size,
-      notes,
-      answers_json ? JSON.stringify(answers_json) : null
-    ];
-
-    const [result] = await pool.execute(sql, values);
-
-    // Return success + inserted row id
-    res.json({ ok: true, id: result.insertId });
+    const rows = await getLatestQuizSubmissions(pool, 10);
+    res.json({ ok: true, rows });
   } catch (err) {
-    console.error("Error in POST /api/quiz:", err);
+    console.error("Error in GET /api/quiz/latest:", err);
     res.status(500).json({ ok: false, error: "Server error" });
   }
 });
 
-// Get the latest 10 quiz submissions (debug endpoint)
-// Example: http://localhost:3000/api/quiz/latest
-app.get("/api/quiz/latest", async (req, res) => {
+
+app.post("/api/quiz", async (req, res) => {
+  console.log("POST /api/quiz body:", req.body);
+
   try {
-    const [rows] = await pool.execute(
-      "SELECT id, preferred_type, age_group, size, notes, created_at FROM quiz_submissions ORDER BY id DESC LIMIT 10"
-    );
-    res.json({ ok: true, rows });
+    const preferred_type = req.body.preferred_type ?? req.body.preferredType;
+    const age_group = req.body.age_group ?? req.body.ageGroup;
+    const size = req.body.size;
+
+    const notes = req.body.notes ?? null;
+    const answers_json = req.body.answers_json ?? req.body.answersJson ?? null;
+
+    if (!preferred_type || !age_group || !size) {
+      return res.status(400).json({ ok: false, error: "Missing required fields" });
+    }
+
+    const id = await insertQuizSubmission(pool, {
+      preferred_type,
+      age_group,
+      size,
+      notes,
+      answers_json
+    });
+
+    res.json({ ok: true, id });
   } catch (err) {
-    console.error("Error in GET /api/quiz/latest:", err);
+    console.error("Error in POST /api/quiz:", err);
     res.status(500).json({ ok: false, error: "Server error" });
   }
 });
