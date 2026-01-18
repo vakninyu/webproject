@@ -104,15 +104,29 @@ document.addEventListener("DOMContentLoaded", () => {
     // (server / DB expects a string even when the user did not choose)
     const normalizeNoMatter = (v) => (v ? v : "no_matter");
 
-    // ========= Build the payload for the server =========
-    // We send only the fields the DB needs + a full snapshot in answers_json
-    const payload = {
-      preferred_type: normalizeNoMatter(answers.preferredType),
-      age_group: normalizeNoMatter(answers.preferredAge),
-      size: normalizeNoMatter(answers.preferredSize),
-      notes: answers.idealPet || answers.adoptionReason || "",
-      answers_json: answers
-    };
+    // ========= Prepare payload for server =========
+    
+  const payload = {
+  // required fields from the form
+  full_name: answers.fullName,
+  phone: answers.phone,
+  email: answers.email || null,
+  living_type: answers.livingType,
+  has_kids: answers.hasKids,
+  has_other_pets: answers.hasOtherPets,
+
+  // matching fields
+  preferred_type: normalizeNoMatter(answers.preferredType),
+  age_group: normalizeNoMatter(answers.preferredAge),
+  size: normalizeNoMatter(answers.preferredSize),
+  preferred_gender: normalizeNoMatter(answers.preferredGender),
+  preferred_personality: normalizeNoMatter(answers.preferredPersonality),
+
+  notes: answers.idealPet || answers.adoptionReason || "",
+  answers_json: answers
+};
+
+
 
     // ========= Send to server =========
     submitBtn.disabled = true;

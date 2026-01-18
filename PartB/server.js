@@ -81,31 +81,40 @@ app.post("/api/quiz", async (req, res) => {
   console.log("POST /api/quiz body:", req.body);
 
   try {
-    const preferred_type = req.body.preferred_type ?? req.body.preferredType;
-    const age_group = req.body.age_group ?? req.body.ageGroup;
-    const size = req.body.size;
+    const data = {
+      full_name: req.body.full_name,
+      phone: req.body.phone,
+      email: req.body.email ?? null,
+      living_type: req.body.living_type,
+      has_kids: req.body.has_kids,
+      has_other_pets: req.body.has_other_pets,
 
-    const notes = req.body.notes ?? null;
-    const answers_json = req.body.answers_json ?? req.body.answersJson ?? null;
+      preferred_type: req.body.preferred_type,
+      age_group: req.body.age_group,
+      size: req.body.size,
+      preferred_gender: req.body.preferred_gender ?? "no_matter",
+      preferred_personality: req.body.preferred_personality ?? "no_matter",
 
-    if (!preferred_type || !age_group || !size) {
-      return res.status(400).json({ ok: false, error: "Missing required fields" });
+      notes: req.body.notes ?? null,
+      answers_json: req.body.answers_json ?? null
+    };
+
+    // בדיקת חובה בסיסית לפי מה שהטבלה דורשת
+    if (!data.full_name || !data.phone || !data.living_type || !data.has_kids || !data.has_other_pets) {
+      return res.status(400).json({ ok: false, error: "Missing required form fields" });
+    }
+    if (!data.preferred_type || !data.age_group || !data.size) {
+      return res.status(400).json({ ok: false, error: "Missing required matching fields" });
     }
 
-    const id = await insertQuizSubmission(pool, {
-      preferred_type,
-      age_group,
-      size,
-      notes,
-      answers_json
-    });
-
+    const id = await insertQuizSubmission(pool, data);
     res.json({ ok: true, id });
   } catch (err) {
     console.error("Error in POST /api/quiz:", err);
     res.status(500).json({ ok: false, error: "Server error" });
   }
 });
+
 
 // ==========================
 // Start server
