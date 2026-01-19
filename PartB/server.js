@@ -96,7 +96,6 @@ app.post("/api/adoptions", async (req, res) => {
       return res.status(400).json({ ok: false, message: "Missing required fields" });
     }
 
-    await crud.addAdoptionRequest(pool, b);
     const id = await crud.addAdoptionRequest(pool, b);
     res.json({ ok: true, id });
   } catch (e) {
@@ -108,7 +107,6 @@ app.post("/api/adoptions", async (req, res) => {
 
 app.post("/api/quiz", async (req, res) => {
   console.log("POST /api/quiz body:", req.body);
-
   try {
     const data = {
       full_name: req.body.full_name,
@@ -136,11 +134,67 @@ app.post("/api/quiz", async (req, res) => {
       return res.status(400).json({ ok: false, error: "Missing required matching fields" });
     }
 
+  // Email validation (if provided)
+    if (data.email) {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(data.email)) {
+       return res.status(400).json({ 
+        ok: false, 
+       error: "Invalid email format" 
+      });
+    }
+  }
+
     const id = await insertQuizSubmission(pool, data);
     res.json({ ok: true, id });
   } catch (err) {
     console.error("Error in POST /api/quiz:", err);
     res.status(500).json({ ok: false, error: "Server error" });
+  }
+});
+
+// Contact form route
+app.post("/api/contact", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    // Validation - check required fields
+    if (!name || !email || !message) {
+      return res.status(400).json({ 
+        ok: false, 
+        message: "Missing required fields" 
+      });
+    }
+
+    // Email validation - ensure proper format
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ 
+        ok: false, 
+        message: "Invalid email format" 
+      });
+    }
+
+    // Insert to database
+    const sql = `
+      INSERT INTO contact_messages (name, email, message)
+      VALUES (?, ?, ?)
+    `;
+    
+    const [result] = await pool.execute(sql, [name, email, message]);
+
+    res.status(201).json({ 
+      ok: true, 
+      id: result.insertId,
+      message: "Message received successfully" 
+    });
+
+  } catch (error) {
+    console.error("Error in POST /api/contact:", error);
+    res.status(500).json({ 
+      ok: false, 
+      message: "Server error" 
+    });
   }
 });
 

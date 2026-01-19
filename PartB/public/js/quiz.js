@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!res.ok || !data.ok) {
         console.error("Server error:", data);
-        quizError.textContent = "שגיאה בשמירה למסד הנתונים, נסו שוב.";
+        quizError.textContent = "אחד הנתונים שגוי, אנא בדקו שוב.";
         quizError.style.display = "block";
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;

@@ -16,11 +16,43 @@ function renderUserSummary(answers) {
     answers.preferredType === "other" ? "אחר" :
     "לא משנה";
 
+  const preferredGenderText =
+    answers.preferredGender === "male" ? "זכר" :
+    answers.preferredGender === "female" ? "נקבה" :
+    "לא משנה";
+
+  const preferredAgeText =
+    answers.preferredAge === "puppy" ? "גור/צעיר" :
+    answers.preferredAge === "adult" ? "בוגר" :
+    answers.preferredAge === "senior" ? "מבוגר" :
+    "לא משנה";
+
+  const preferredSizeText =
+    answers.preferredSize === "small" ? "קטן" :
+    answers.preferredSize === "medium" ? "בינוני" :
+    answers.preferredSize === "large" ? "גדול" :
+    "לא משנה";
+
+   const preferredPersonalityText =
+    (answers.preferredPersonality === "calm" ? "רגוע" :
+    answers.preferredPersonality === "playful" ? "שובב" :
+    answers.preferredPersonality === "friendly" ? "חברותי" :
+    "לא משנה")
+    + (answers.hasKids === "yes" ? " + מסתדר עם ילדים" : "");
+ 
+
+
+
+
   // Build a quick summary of the user's preferences
   userSummary.innerHTML = `
     <p>
       <strong>סיכום העדפות שלך:</strong><br>
       סוג חיה מועדף: ${preferredTypeText}<br>
+      מין מועדף: ${preferredGenderText}<br>
+      גיל מועדף: ${preferredAgeText}<br>
+      גודל מועדף: ${preferredSizeText}<br>
+      אופי מועדף: ${preferredPersonalityText}<br>
       מגורים: ${answers.livingType === "apartment" ? "דירה" : answers.livingType === "house" ? "בית עם חצר" : "לא צוין"}<br>
       ילדים בבית: ${answers.hasKids === "yes" ? "יש" : answers.hasKids === "no" ? "אין" : "לא צוין"}<br>
       חיות נוספות בבית: ${answers.hasOtherPets === "yes" ? "יש" : answers.hasOtherPets === "no" ? "אין" : "לא צוין"}
@@ -58,7 +90,7 @@ function scorePet(pet, answers) {
   }
 
   if (answers.hasOtherPets === "yes") {
-    if (pet.goodWithPets === true) score += 2;
+    if (pet.good_with_pets === "yes") score += 2;
     else score -= 5;
   }
 
@@ -85,7 +117,6 @@ function renderResults(pets) {
   pets.forEach(pet => {
     const card = document.createElement("div"); // Pet card container
     card.className = "pet-card"; 
-
     // Convert pet attributes to Hebrew labels
     const typeText = 
       pet.type === "dog" ? "כלב" :
@@ -111,22 +142,40 @@ function renderResults(pets) {
       pet.kids_friendly === "yes" ? "כן" :
       pet.kids_friendly === "no" ? "לא" : "לא צוין";
 
+    const genderText =
+      pet.gender === "male" ? "זכר" :
+      pet.gender === "female" ? "נקבה" : "לא צוין";
+
+    const yardText =
+      pet.needs_yard === "yes" ? "כן" :
+      pet.needs_yard === "no" ? "לא" : "לא צוין";
+
+    const personalityText =
+      pet.calm === "yes" ? "רגוע" :
+      pet.playful === "yes" ? "שובב" :
+      pet.friendly === "yes" ? "חברותי" :
+      "לא צוין";
+
+
     // Build the card HTML
     card.innerHTML = `
       <img src="${pet.image}" alt="${pet.name}"> 
       <h3>${pet.name}</h3>
       <div class="pet-details"> 
         <p>סוג: ${typeText}</p>
+        <p>מין: ${genderText}</p>
         <p>גיל: ${ageText}</p>
         <p>גודל: ${sizeText}</p>
-        <p>מיקום: ${pet.city || "לא צוין"}</p>
+        <p>אופי: ${personalityText}</p>
+        <p>צריך חצר: ${yardText}</p>
         <p>מסתדר עם ילדים: ${kidsText}</p>
         <p>מסתדר עם חיות: ${petsText}</p>
+        <p>מיקום: ${pet.city || "לא צוין"}</p>
         <p>${pet.description || ""}</p> 
       </div>
       <div class="pet-actions"> 
         <button class="primary-btn" type="button" onclick="goToAdopt(${pet.id})"> 
-          אני רוצה לאמץ
+          אני רוצה לאמץ!
         </button>
       </div>
     `;
@@ -229,9 +278,29 @@ if (dbStatus) {
         pool = pool.filter(p => p.gender === mergedAnswers.preferredGender);
     }
 
-      // Apartment rule: remove large animals
+      // Hard filter: preferred age (only if selected)
+      if (mergedAnswers.preferredAge && mergedAnswers.preferredAge.trim() !== "") {
+        pool = pool.filter(p => ageMatches(mergedAnswers.preferredAge, p.age_group));
+      }
+
+      // Hard filter: preferred size (only if selected)
+      if (mergedAnswers.preferredSize && mergedAnswers.preferredSize.trim() !== "") {
+        pool = pool.filter(p => p.size === mergedAnswers.preferredSize);
+      }
+
+      // Hard rule: if user has kids => show ONLY kid-friendly pets
+      if (mergedAnswers.hasKids === "yes") {
+        pool = pool.filter(p => p.kids_friendly === "yes");
+      }
+
+      // Hard rule: if user has other pets => show ONLY pets that are good with pets
+      if (mergedAnswers.hasOtherPets === "yes") {
+        pool = pool.filter(p => p.good_with_pets === "yes");
+      }
+
+      // Hard rule: if user lives in apartment => hide pets that need yard
       if (mergedAnswers.livingType === "apartment") {
-        pool = pool.filter(p => p.size !== "large");
+        pool = pool.filter(p => p.needs_yard !== "yes");
       }
 
       // If no pets left after filtering, show no results
