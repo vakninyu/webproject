@@ -6,7 +6,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import express from "express";
 import mysql from "mysql2/promise";
-import { insertQuizSubmission, getLatestQuizSubmissions } from "./crud.js";
+import { insertQuizSubmission, getLatestQuizSubmissions, getAllPets } from "./crud.js";
+import * as crud from "./crud.js";
 
 
 // ==========================
@@ -73,6 +74,34 @@ app.get("/api/quiz/latest", async (req, res) => {
   } catch (err) {
     console.error("Error in GET /api/quiz/latest:", err);
     res.status(500).json({ ok: false, error: "Server error" });
+  }
+});
+
+app.get("/api/pets", async (req, res) => {
+  try {
+    const rows = await getAllPets(pool);
+    res.json({ ok: true, rows });
+  } catch (err) {
+    console.error("Error in GET /api/pets:", err);
+    res.status(500).json({ ok: false, error: "Server error" });
+  }
+});
+
+app.post("/api/adoptions", async (req, res) => {
+  try {
+    const b = req.body;
+
+    // מינימום חובה לפי הטבלה
+    if (!b?.quiz_id || !b?.pet_id || !b?.full_name || !b?.phone) {
+      return res.status(400).json({ ok: false, message: "Missing required fields" });
+    }
+
+    await crud.addAdoptionRequest(pool, b);
+    const id = await crud.addAdoptionRequest(pool, b);
+    res.json({ ok: true, id });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ ok: false, message: "Server error" });
   }
 });
 

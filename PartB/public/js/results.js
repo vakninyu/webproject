@@ -49,11 +49,11 @@ function scorePet(pet, answers) {
  // Direct preference matches (small positive weights)
   if (answers.preferredGender && pet.gender === answers.preferredGender) score += 2;
   if (answers.preferredSize && pet.size === answers.preferredSize) score += 2;
-  if (answers.preferredAge && ageMatches(answers.preferredAge, pet.ageGroup)) score += 2;
+  if (answers.preferredAge && ageMatches(answers.preferredAge, pet.age_group)) score += 2;
 
   // If the user has kids, heavily favor kid-friendly pets, penalize the rest
   if (answers.hasKids === "yes") {
-    if (pet.kidsFriendly === true) score += 3;
+    if (pet.kids_friendly === "yes") score += 3;
     else score -= 6;
   }
 
@@ -93,10 +93,10 @@ function renderResults(pets) {
       pet.type === "rabbit" ? "ארנב" : "אחר";
 
     const ageText =
-      pet.ageGroup === "puppy" ? "גור" :
-      pet.ageGroup === "young" ? "צעיר" :
-      pet.ageGroup === "adult" ? "בוגר" :
-      pet.ageGroup === "senior" ? "מבוגר" : "לא צוין";
+      pet.age_group === "puppy" ? "גור" :
+      pet.age_group === "young" ? "צעיר" :
+      pet.age_group === "adult" ? "בוגר" :
+      pet.age_group === "senior" ? "מבוגר" : "לא צוין";
 
     const sizeText =
       pet.size === "small" ? "קטן" :
@@ -104,12 +104,12 @@ function renderResults(pets) {
       pet.size === "large" ? "גדול" : "לא צוין";
 
     const petsText =
-      pet.goodWithPets === true ? "כן" :
-      pet.goodWithPets === false ? "לא" : "לא צוין";
+      pet.good_with_pets === "yes" ? "כן" :
+      pet.good_with_pets === "no" ? "לא" : "לא צוין";
 
     const kidsText =
-      pet.kidsFriendly === true ? "כן" :
-      pet.kidsFriendly === false ? "לא" : "לא צוין";
+      pet.kids_friendly === "yes" ? "כן" :
+      pet.kids_friendly === "no" ? "לא" : "לא צוין";
 
     // Build the card HTML
     card.innerHTML = `
@@ -119,7 +119,7 @@ function renderResults(pets) {
         <p>סוג: ${typeText}</p>
         <p>גיל: ${ageText}</p>
         <p>גודל: ${sizeText}</p>
-        <p>מיקום: ${pet.location || "לא צוין"}</p>
+        <p>מיקום: ${pet.city || "לא צוין"}</p>
         <p>מסתדר עם ילדים: ${kidsText}</p>
         <p>מסתדר עם חיות: ${petsText}</p>
         <p>${pet.description || ""}</p> 
@@ -178,10 +178,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Show the summary section based on the quiz answers
   renderUserSummary(mergedAnswers);
 
-  // Load all pets data from the JSON file
-  fetch("data/animals.json")
-    .then(response => response.json())
-    .then(allPets => {
+  // Load all pets data from the DB (via server)
+fetch("/api/pets")
+  .then(res => res.json())
+  .then(data => {
+    const allPets = (data && data.ok && Array.isArray(data.rows)) ? data.rows : [];
+
     // If there are no saved quiz answers in localStorage
     // and no latest submission found in the database,
     // show all pets without applying any filters

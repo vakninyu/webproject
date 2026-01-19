@@ -77,6 +77,53 @@ export const getLatestQuizSubmissions = async (pool, limit = 10) => {
   return rows;
 };
 
+// Get all pets (for results page)
+export const getAllPets = async (pool) => {
+  const [rows] = await pool.execute(
+    `SELECT *
+     FROM pets
+     ORDER BY id DESC`
+  );
+  return rows;
+};
+
+export const addAdoptionRequest = async (pool, data) => {
+  const {
+    quiz_id,
+    pet_id,
+    full_name,
+    phone,
+    email,
+    city,
+    living_type,
+    has_kids,
+    has_other_pets,
+    request_notes
+  } = data;
+
+  const sql = `
+    INSERT INTO adoption_requests
+    (quiz_id, pet_id, full_name, phone, email, city, living_type, has_kids, has_other_pets, request_notes)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const values = [
+    quiz_id,
+    pet_id,
+    full_name,
+    phone,
+    email || null,
+    city || null,
+    living_type || null,
+    has_kids || null,
+    has_other_pets || null,
+    request_notes || null
+  ];
+
+  const [result] = await pool.execute(sql, values);
+  return result.insertId;
+};
+
 
 
 

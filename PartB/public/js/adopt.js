@@ -16,12 +16,12 @@ function typeText(type) {
   return type === "dog" ? "כלב" : type === "cat" ? "חתול" : type === "rabbit" ? "ארנב" : "אחר";
 }
 
-function ageText(ageGroup) {
+function ageText(age_group) {
   // Convert age groups to user-friendly text
-  return ageGroup === "puppy" ? "גור" :
-    ageGroup === "young" ? "צעיר" :
-    ageGroup === "adult" ? "בוגר" :
-    ageGroup === "senior" ? "מבוגר" : "לא צוין";
+  return age_group === "puppy" ? "גור" :
+    age_group === "young" ? "צעיר" :
+    age_group === "adult" ? "בוגר" :
+    age_group === "senior" ? "מבוגר" : "לא צוין";
 }
 function sizeText(size) {
   // Convert size values to Hebrew labels
@@ -29,9 +29,12 @@ function sizeText(size) {
 }
 
 function yesNo(v) {
-  // Convert booleans into "כן / לא / לא צוין"
-  return v === true ? "כן" : v === false ? "לא" : "לא צוין";
+  // תומך גם ב-true/false וגם ב-"yes"/"no" מה-DB
+  if (v === true || v === "yes") return "כן";
+  if (v === false || v === "no") return "לא";
+  return "לא צוין";
 }
+
 
 // Safely parse JSON from localStorage without crashing the page
 function safeJSON(key) {
@@ -89,16 +92,17 @@ function renderPet(pet) {
       <div class="pet-head">
         <h3 class="pet-name">${pet.name}</h3>
         <p class="pet-sub">
-          ${genderText} · ${ageText(pet.ageGroup)} · ${sizeText(pet.size)} · ${pet.location || "לא צוין"}
+         ${genderText} · ${ageText(pet.age_group)} · ${sizeText(pet.size)} · ${pet.city || "לא צוין"}
+
         </p>
       </div>
 
       <div class="pet-tags">
-        <span class="tag ${pet.kidsFriendly ? "ok" : "no"}">
-          ילדים: ${yesNo(pet.kidsFriendly)}
+        <span class="tag ${pet.kids_friendly === "yes" ? "ok" : "no"}">
+          ילדים: ${yesNo(pet.kids_friendly)}
         </span>
-        <span class="tag ${pet.goodWithPets ? "ok" : "no"}">
-          חיות נוספות: ${yesNo(pet.goodWithPets)}
+        <span class="tag ${pet.good_with_pets === "yes" ? "ok" : "no"}">
+          חיות נוספות: ${yesNo(pet.good_with_pets)}
         </span>
       </div>
 
@@ -135,9 +139,9 @@ function buildSubmissionPayload(pet, quiz) {
       name: pet.name,
       type: pet.type,
       gender: pet.gender,
-      ageGroup: pet.ageGroup,
+      age_group: pet.age_group,
       size: pet.size,
-      location: pet.location
+      city: pet.city
     } : null,
 
     // Adopter details from the form
@@ -199,10 +203,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Load pet data and find the selected pet
-  fetch("data/animals.json")
+  fetch("/api/pets")
     .then(r => r.json())
-    .then(allPets => {
-      const pet = allPets.find(p => Number(p.id) === Number(selectedPetId));
+  .then(data => {
+    const allPets = data.rows || [];
+    const pet = allPets.find(p => Number(p.id) === Number(selectedPetId));;
       if (!pet) {
         if (adoptError) adoptError.style.display = "block";
         return;
@@ -294,8 +299,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const selectedPetIdNow = localStorage.getItem("selectedPetId");
 
       try {
-        const allPets = await fetch("data/animals.json").then(r => r.json());
-        pet = allPets.find(p => Number(p.id) === Number(selectedPetIdNow)) || null;
+       const data = await fetch("/api/pets").then(r => r.json());
+       const allPets = data.rows || [];
+       pet = allPets.find(p => Number(p.id) === Number(selectedPetIdNow)) || null;
+
       } catch (err) {
         console.error(err);
       }
@@ -303,14 +310,46 @@ document.addEventListener("DOMContentLoaded", () => {
       // Build and store the "submission" payload locally
       const payload = buildSubmissionPayload(pet, quiz);
 
+      const dbPayload = {
+      quiz_id: Number(localStorage.getItem("submissionId")) || null,
+      pet_id: Number(localStorage.getItem("selectedPetId")) || null,
+      full_name: payload.adopter.name,
+      phone: payload.adopter.phone,
+      email: payload.adopter.email || null,
+      city: payload.adopter.city || null,
+      living_type: payload.adoptPreferences.livingType || null,
+      has_kids: payload.adoptPreferences.hasKids || null,
+      has_other_pets: payload.adoptPreferences.hasOtherPets || null,
+      request_notes: payload.adopter.message || null
+    };
+
+
       // Save the adopt request locally
-      localStorage.setItem("adoptRequest", JSON.stringify(payload));
+      const res = await fetch("/api/adoptions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dbPayload)
+    });
+
+    const data = await res.json();
+      if (adoptSuccess) {
+        adoptSuccess.textContent = `הבקשה נשלחה בהצלחה. מספר פנייה: ${data.id}`;
+        adoptSuccess.style.display = "block";
+      }
+
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        if (adoptFormError) {
+          adoptFormError.textContent = err.message || "שגיאה בשליחה לשרת";
+          adoptFormError.style.display = "block";
+        }
+        return;
+    }
+
       localStorage.removeItem("adoptDraft");
 
-      // Show success message and reset the form
-      if (adoptSuccess) adoptSuccess.style.display = "block";
       adoptForm.reset();
-
       // After reset, re-fill from quiz so it's easy to submit again
       fillFromQuiz(quiz);
     });
