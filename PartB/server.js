@@ -106,7 +106,6 @@ app.post("/api/adoptions", async (req, res) => {
 
 
 app.post("/api/quiz", async (req, res) => {
-  console.log("POST /api/quiz body:", req.body);
   try {
     const data = {
       full_name: req.body.full_name,
