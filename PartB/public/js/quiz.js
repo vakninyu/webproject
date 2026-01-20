@@ -126,8 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
   answers_json: answers
 };
 
-
-
     // ========= Send to server =========
     submitBtn.disabled = true;
     submitBtn.textContent = "שומר לשרת...";

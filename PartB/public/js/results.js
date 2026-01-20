@@ -41,9 +41,6 @@ function renderUserSummary(answers) {
     + (answers.hasKids === "yes" ? " + מסתדר עם ילדים" : "");
  
 
-
-
-
   // Build a quick summary of the user's preferences
   userSummary.innerHTML = `
     <p>

@@ -1,6 +1,11 @@
 // crud.js
 // Database operations for the project (quiz, adoption, pets, etc.)
 
+
+// Insert a new quiz submission into the database
+// This function receives the quiz data from the client
+// and saves it in the quiz_submissions table.
+// It returns the ID of the newly created quiz record.
 export const insertQuizSubmission = async (pool, data) => {
   const {
     full_name,
@@ -60,7 +65,10 @@ export const insertQuizSubmission = async (pool, data) => {
   return result.insertId;
 };
 
-// Get latest quiz submissions (for debug / admin page)
+
+// Get the latest quiz submissions from the database
+// Used mainly for debugging or an admin-style view
+// The limit parameter controls how many records are returned
 export const getLatestQuizSubmissions = async (pool, limit = 10) => {
   const n = parseInt(limit, 10);
   const safeLimit = Number.isFinite(n) && n > 0 && n <= 100 ? n : 10;
@@ -77,7 +85,8 @@ export const getLatestQuizSubmissions = async (pool, limit = 10) => {
   return rows;
 };
 
-// Get all pets (for results page)
+// Get all pets from the database 
+// This data is used to display the matching pets on the results page
 export const getAllPets = async (pool) => {
   const [rows] = await pool.execute(
     `SELECT *
@@ -87,6 +96,9 @@ export const getAllPets = async (pool) => {
   return rows;
 };
 
+// Insert a new adoption request into the database
+// This function connects a quiz submission with a specific pet
+// and saves the user's adoption details
 export const addAdoptionRequest = async (pool, data) => {
   const {
     quiz_id,
