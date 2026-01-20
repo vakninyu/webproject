@@ -112,7 +112,7 @@ app.post("/api/adoptions", async (req, res) => {
   try {
     const b = req.body;
 
-    // מינימום חובה לפי הטבלה
+    // Validation - check required fields
     if (!b?.quiz_id || !b?.pet_id || !b?.full_name || !b?.phone) {
       return res.status(400).json({ ok: false, message: "Missing required fields" });
     }
