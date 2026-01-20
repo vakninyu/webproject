@@ -29,7 +29,7 @@ function sizeText(size) {
 }
 
 function yesNo(v) {
-  // תומך גם ב-true/false וגם ב-"yes"/"no" מה-DB
+  // Convert boolean-like values to yes/no labels
   if (v === true || v === "yes") return "כן";
   if (v === false || v === "no") return "לא";
   return "לא צוין";
