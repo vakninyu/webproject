@@ -136,6 +136,22 @@ export const addAdoptionRequest = async (pool, data) => {
   return result.insertId;
 };
 
+// Get latest adoption requests (for admin / debug view)
+export const getLatestAdoptionRequests = async (pool, limit = 10) => {
+  const n = parseInt(limit, 10);
+  const safeLimit = Number.isFinite(n) && n > 0 && n <= 100 ? n : 10;
+
+  const [rows] = await pool.execute(
+    `SELECT *
+     FROM adoption_requests
+     ORDER BY id DESC
+     LIMIT ${safeLimit}`
+  );
+
+  return rows;
+};
+
+
 
 
 

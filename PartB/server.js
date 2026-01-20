@@ -67,6 +67,27 @@ const pool = mysql.createPool({
 // Routes
 // ==========================
 
+// Health check endpoint
+app.get("/api/health", async (req, res) => {
+  try {
+    // Simple database check
+    await pool.execute("SELECT 1");
+
+    res.json({
+      status: "ok",
+      server: "running",
+      database: "connected",
+      timestamp: new Date()
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      server: "running",
+      database: "disconnected"
+    });
+  }
+});
+
 app.get("/api/quiz/latest", async (req, res) => {
   try {
     const rows = await getLatestQuizSubmissions(pool, 10);
@@ -125,7 +146,7 @@ app.post("/api/quiz", async (req, res) => {
       answers_json: req.body.answers_json ?? null
     };
 
-    // בדיקת חובה בסיסית לפי מה שהטבלה דורשת
+    // Validation - check required fields
     if (!data.full_name || !data.phone || !data.living_type || !data.has_kids || !data.has_other_pets) {
       return res.status(400).json({ ok: false, error: "Missing required form fields" });
     }
@@ -197,6 +218,16 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
+// GET latest adoption requests
+app.get("/api/adoptions/latest", async (req, res) => {
+  try {
+    const rows = await crud.getLatestAdoptionRequests(pool, 10);
+    res.json({ ok: true, rows });
+  } catch (err) {
+    console.error("Error in GET /api/adoptions/latest:", err);
+    res.status(500).json({ ok: false, error: "Server error" });
+  }
+});
 
 // ==========================
 // Start server
